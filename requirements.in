@@ -1,9 +1,0 @@
-jupyter
-numpy
-plotly
-matplotlib
-sympy
-scipy
-fortran-magic
-jupyter_nbextensions_configurator
-bleach>=3.1.1
