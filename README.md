@@ -1,13 +1,11 @@
 # Notebooks on Maths
 
-Small math problems discussed in [jupyter] notebooks
+Repository of [jupyter] notebooks about math/physics problems discussed with good friends and (in the best case) even with  solutions!
 
-
-## Pentagon & Square
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/pcrespov/maths-notebooks.git/master?filepath=pepa-penthagonsquare%2FPentagonSquare.ipynb)
-
-![](pepa-penthagonsquare/geometry.jpg)
-
+Every folder is a different problem and normally contain:
+    - One or more [jupyter] notebook for discussion notes and calculations
+    - A ``README.md`` with a badge (I love badges!) to [mybinder]: an easy way have everythin ready running w/o installing anything and easy to share while discussing
 
 
 [jupyter]:https://jupyter.org
+[mybinder]:https://mybinder.org/
