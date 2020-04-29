@@ -1,13 +1,18 @@
-# Notebooks on Maths
+# Math & Friends
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/pcrespov/maths-notebooks.git/master)
 
-Repository of [jupyter] notebooks about math/physics problems discussed with good friends and (in the best case) even with  solutions!
+Repository of [jupyter] notebooks created around small math & physics problems discussed with good friends and (in the best case) even with  solutions!
 
-- Every folder is a different problem and normally contain:
-  - One or more [jupyter] notebook with code (typically in [python3x]) and discussion notes, calculations, etc
-  - A ``README.md`` with a badge (I love badges!) to [mybinder]: an easy way have everythin ready running w/o installing anything and easy to share while discussing
-- ``Makefile`` is mostly for local development
+- Every folder is a different problem and normally contain one or more [jupyter] notebook with code (typically in [python3x]) and discussion notes, calculations, etc
+- If you want to run them on your own machine (Linux/Mac)
+
+```cmd
+  git clone https://github.com/pcrespov/maths-n-friends.git
+  make devenv 
+  make start
+```
+- If you want to run them online, just client [mybinder] badge above (I love badges BTW!)
 
 
 [jupyter]:https://jupyter.org
