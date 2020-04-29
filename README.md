@@ -1,6 +1,6 @@
 # Math & Friends
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/pcrespov/maths-notebooks.git/master)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/pcrespov/maths-n-friends.git/latest)
 
 Repository of [jupyter] notebooks created around small math & physics problems discussed with good friends and (in the best case) even with  solutions!
 
