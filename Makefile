@@ -10,12 +10,16 @@ SHELL := /bin/bash
 .venv:
 	@python3 -m venv $@
 	@$@/bin/pip install --upgrade pip setuptools wheel
+	@$@/bin/pip install pip-tools
 
 
 devenv: .venv ## sets up development enviroment
-	@$</bin/pip install pip-tools
+	@$</bin/pip install -r requirements.txt
 	@echo "Type 'source .venv/bin/activate' to activate a python virtual environment"
 
+
+start: .venv ## starts jupyter
+	@$</bin/jupyter notebook
 
 
 .PHONY: clean clean-all

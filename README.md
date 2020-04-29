@@ -1,5 +1,7 @@
 # Notebooks on Maths
 
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/pcrespov/maths-notebooks.git/master)
+
 Repository of [jupyter] notebooks about math/physics problems discussed with good friends and (in the best case) even with  solutions!
 
 - Every folder is a different problem and normally contain:
