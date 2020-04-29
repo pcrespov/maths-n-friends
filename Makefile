@@ -23,7 +23,7 @@ start: .venv ## starts jupyter
 
 
 .PHONY: clean clean-all
-_GIT_CLEAN_ARGS = -dxf -e .vscode .venv
+_GIT_CLEAN_ARGS = -dxf -e .vscode -e .venv
 
 clean: ## cleans all unversioned files in project and temp files create by this makefile
 	# Cleaning unversioned
