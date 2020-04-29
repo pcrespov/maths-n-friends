@@ -1,16 +1,43 @@
-.PHONY: all clean install
+
+# defaults
+.DEFAULT_GOAL := help
+
+# Use bash not sh
+SHELL := /bin/bash
 
 
-all: install
-
+.PHONY: devenv
 .venv:
-	@python3 -m venv .venv
-	@.venv/bin/pip install --upgrade pip setuptools wheel
-	@.venv/bin/pip install pip-tools
+	@python3 -m venv $@
+	@$@/bin/pip install --upgrade pip setuptools wheel
+
+
+devenv: .venv ## sets up development enviroment
+	@$</bin/pip install pip-tools
 	@echo "Type 'source .venv/bin/activate' to activate a python virtual environment"
 
-install: .venv
-	@.venv/bin/pip install -r requirements.txt
 
-clean:
-	@rm -rf .venv
+
+.PHONY: clean clean-all
+_GIT_CLEAN_ARGS = -dxf -e .vscode .venv
+
+clean: ## cleans all unversioned files in project and temp files create by this makefile
+	# Cleaning unversioned
+	@git clean -n $(_GIT_CLEAN_ARGS)
+	@echo -n "Are you sure? [y/N] " && read ans && [ $${ans:-N} = y ]
+	@echo -n "$(shell whoami), are you REALLY sure? [y/N] " && read ans && [ $${ans:-N} = y ]
+	@git clean $(_GIT_CLEAN_ARGS)
+
+
+clean-all:
+	-@rm -rf .venv
+
+
+.PHONY: help
+help: ## this help
+	@echo "usage: make [target] ..."
+	@echo ""
+	@echo "Targets for '$(notdir $(CURDIR))':"
+	@echo ""
+	@awk --posix 'BEGIN {FS = ":.*?## "} /^[[:alpha:][:space:]_-]+:.*?## / {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
+	@echo ""
