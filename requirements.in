@@ -6,4 +6,5 @@ sympy
 scipy
 fortran-magic
 jupyter_nbextensions_configurator
+jupyter_contrib_nbextensions
 bleach>=3.1.1
