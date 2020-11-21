@@ -32,6 +32,9 @@ clean: ## cleans all unversioned files in project and temp files create by this 
 	@echo -n "$(shell whoami), are you REALLY sure? [y/N] " && read ans && [ $${ans:-N} = y ]
 	@git clean $(_GIT_CLEAN_ARGS)
 
+.PHONY: requirements.txt
+requirements.txt: requirements.in
+	pip-compile --build-isolation --generate-hashes $<
 
 clean-all:
 	-@rm -rf .venv
