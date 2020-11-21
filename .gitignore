@@ -220,3 +220,6 @@ venv.bak/
 
 # IDE configs
 .vscode
+
+# serialization
+*.pkl
