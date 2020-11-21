@@ -34,7 +34,7 @@ clean: ## cleans all unversioned files in project and temp files create by this 
 
 .PHONY: requirements.txt
 requirements.txt: requirements.in
-	pip-compile --build-isolation --generate-hashes $<
+	pip-compile --build-isolation --upgrade $<
 
 clean-all:
 	-@rm -rf .venv
