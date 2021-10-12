@@ -127,7 +127,7 @@ jupyter-server-proxy==3.0.2
     # via
     #   jupyterlab-vpython
     #   vpython
-jupyterlab==3.0.16
+jupyterlab==3.0.17
     # via jupyterlab-vpython
 jupyterlab-pygments==0.1.2
     # via nbconvert
