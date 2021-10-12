@@ -1,0 +1,266 @@
+% -*- Mode: LaTeX; tab-width: 4 -*-
+%
+% Work on Sheldon Axler 'Linear Algebra Done Right'.
+% Pedro Crespo Valero - 2021
+
+\documentclass[11pt,notitlepage,oneside]{article}
+\author{Pedro Crespo-Valero}
+
+\usepackage[margin=1.5cm]{geometry} % to tell the pdf about our paper size
+\usepackage[pdfpagelabels,pdfpagemode=None,backref=page,pagebackref=true,
+colorlinks=true,bookmarks=true,bookmarksnumbered=true]{hyperref}
+\usepackage{nameref}
+\usepackage[latin1]{inputenc} % accents, REQUIRED for non english languages
+\usepackage[english]{babel}
+\usepackage{graphicx} % anything beyond pure text requires this
+\usepackage[centertags,sumlimits,nointlimits,reqno]{amsmath}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{amsxtra}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage[nottoc,notbib]{tocbibind} % to put the bibliography in the toc
+\usepackage[square,comma,numbers,sort&compress]{natbib} % many options in bibl.
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes,backgrounds}
+%\usepackage{color}
+%\usepackage{enumitem}
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\usepackage[printonlyused,withpage]{acronym}
+
+%% NEW COMMANDS ------
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\newcommand{\hilight}[1]{\colorbox{yellow}{#1}}
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\diff}{\mathrm{d}}
+\newcommand{\firstsaid}[1]{\textbf{#1}}
+\newcommand{\relphantom}[1]{\mathrel{\phantom{#1}}}
+\newcommand{\wedgeseq}{\wedge\ldots\wedge}
+\newcommand{\hodge}{\star}
+\newcommand{\laplacian}{\Delta}
+\DeclareMathOperator{\rot}{curl}
+\DeclareMathOperator{\divg}{div}
+\DeclareMathOperator{\dimension}{dim}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\trace}{trace}
+\DeclareMathOperator{\conv}{conv}
+
+\renewcommand{\theparagraph}{\arabic{section}.\arabic{paragraph}}
+\newcommand{\exref}[1]{Ex.\ref{#1}}
+\newcommand{\figref}[1]{Fig.\ref{#1}}
+\newcommand{\tbc}{\ensuremath{\ \oplus}}
+\newcommand{\exo}[1]{%
+\addtocontents{toc}{\protect\setcounter{tocdepth}{2}}%
+\paragraph{#1}}
+\newcommand{\nullspace}[1]{\mathrm{null}\,{#1}}
+\newcommand{\rangespace}[1]{\mathrm{range}\,{#1}}
+\newcommand{\inner}[1]{\langle {#1}\rangle}
+\newcommand{\norm}[1]{\|#1\|}
+\newcommand{\jota}{\mathrm{j}}
+
+% From DLL
+\input{margins}
+\usepackage{parskip}
+\linespread{0.95}
+\interfootnotelinepenalty=10000
+
+\selectlanguage{english}
+\setcounter{secnumdepth}{10}
+\setcounter{tocdepth}{1}
+
+
+% http://tex.stackexchange.com/questions/1230/reference-name-of-description-list-item-in-latex
+\makeatletter
+\let\orgdescriptionlabel\descriptionlabel
+\renewcommand*{\descriptionlabel}[1]{%
+  \let\orglabel\label%
+  \let\label\@gobble%
+  \phantomsection%
+  \edef\@currentlabel{#1}%
+  \edef\@currentlabelname{#1}%
+  \let\label\orglabel%
+  \orgdescriptionlabel{#1}%
+}
+\makeatother
+
+
+% MAIN DOCUMENT ----------------------------------------------------------------
+\begin{document}
+\title{From \emph{Linear Algebra Done Right}~\cite{Axler1997}}
+\date{2015/9}
+\maketitle
+
+\tableofcontents
+
+\newpage
+\setcounter{section}{0}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Vector Spaces}
+\subsection*{Summary}
+% Summary -----------------------------------------------------
+\begin{itemize}
+\item \textbf{scalars} $\mathbb{F}$
+\begin{itemize}
+\item commutativity +, $\cdot$
+\item associativity +, $\cdot$
+\item identity +0, $\cdot 1$
+\item additive inverse: $\exists!w \mid z + w = 0$
+\item multiplicative inverse: $\exists!w$ and $z\neq0$ then $z\cdot w = 1$ 
+\item distributive $a(b+c) = ab+ac$
+\end{itemize}
+%---
+\item A \textbf{vector space} is a set $V$ along with an addition on $V$ and a scalar multiplication on $V$:
+\begin{itemize}
+\item commutativity +
+\item associativity +
+\item additive identity: $0\in V$ such that $v+0=v$ $\forall v\in V$
+\item additive inverse: $\forall v\in V,\; \exists!w\in V$ such that $v+w=0$
+\item multiplicative identify: $1v=v\;\forall v\in V$ and $1\in\mathbb{F}$
+\item distributive: $a(u+v)=au+av$ and $(a+b)u=au+bu$ $\forall a,b\in\mathbb{F}$ and $\forall u,v \in V$.
+\end{itemize}
+ 
+\item[P1:] A \emph{vector space} has a \emph{unique} additive identity $0$
+\item[P2:] Every \emph{element} of a vector space has a \emph{unique} additive inverse $v\leftarrow -v$
+\item[P3:] $0v=0$ $\forall v\in V$
+\item[P4:] $a0=0$ $\forall a\in \mathbb{F}$
+\item[P5:] $(-1)v = -v$ $\forall v\in V$, i.e. the additive inverse
+
+\item \textbf{subspace}: $U\subset V$ is a subspace of $V$ if $U$ is also a vector space.
+\begin{itemize}
+\item has additive identity: $0\in U$
+\item closed under addition $\forall u,v \in V$: $u+v \in U$ 
+\item closed under scalar multiplication $\forall \lambda\in \mathbb{F}$ and $\forall u \in V$: $\lambda u \in U$  
+\item remaining conditions are automatically satisfied since $U\subset V$.
+\end{itemize} 
+
+\item \textbf{sum of subspaces}: $U_1+\cdots U_n = \sum U_i =\{\sum u_i\mid u_i\in U_i\}$ and $U_i\subset V$ subspaces of $V$. $\sum U_i$ is
+\begin{itemize}
+\item a subspace of $V$.
+\item the smallest subspace of $V$ that contains all $U_i$.
+\end{itemize}
+
+\item $V$ is a \textbf{direct sum of subspaces} $U_i$, written $V=U_1\oplus\cdots\oplus U_n$, if each element of $V$ can be written \emph{uniquely} as a sum $\sum u_i$, where each $u_i\in U_i$. $V=\bigoplus U_i \iff$
+\begin{itemize}
+\item $V = \sum U_i$
+\item $0=\sum u_i$ and $u_i=0 \in U_i$.
+\end{itemize}
+
+\item[P6:] $U,W$ subspaces of $V$ and $V=U\oplus W \iff$
+\begin{itemize}
+\item $V=U+V$
+\item $U\cap V=\{0\}$
+\end{itemize}
+but \emph{only} valid for \emph{pairs} of subspaces!
+
+\end{itemize}
+
+\subsection*{Exercises}
+%------------------------------------------------------------------------ 
+\exo{}
+\begin{align*}
+\frac{1}{z} = \frac{z^*}{zz^*}=\frac{a-\mathrm{j}b}{a^2 + b^2}
+\end{align*}\qed
+
+%------------------------------------------------------------------------ 
+\exo{}
+\begin{align*}
+\sqrt[3]{1} = \exp{\left(\mathrm{j}\frac{2\pi k}{3}\right)} = \cos(2\pi k/3) +\mathrm{j}\sin(2\pi k/3) = \left\{ 1, \frac{-1+\sqrt{3}\mathrm{j}}{2}, \frac{-1-\sqrt{3}\mathrm{j}}{2} \right\} 
+\end{align*}
+for $k=0,1,2$.  \qed
+%------------------------------------------------------------------------ 
+\exo{} Applying P5 twice and the multiplicative identity
+\begin{align*}
+-(-v)= (-1)(-1)v = 1v = v  
+\end{align*}\qed
+%------------------------------------------------------------------------ 
+\exo{} \textit{Reductio ad absurdum}: Let $av=0$ with $a\neq 0 \in \mathbb{F}$, $v\neq0 \in V$. Using the scalar's multiplicative inverse property, if $a\neq 0$ there exists a unique $b\in \mathbb{F}$ that inverses it $ab = ba = 1$. Then
+\begin{align*}
+av &= 0 & \\ 
+bav &= b0 & \\
+1v &= 0 & \text{mult. inverse \& conmutative + P3}\\ 
+v &=0 & \text{mult. identity}
+\end{align*}
+which is a contradiction. 
+\qed
+%------------------------------------------------------------------------ 
+\exo{}
+\begin{enumerate}
+\item[a)] $V=\{x\in\mathbb{F}^3\mid vx^T=0$ with $v=(1,2,3)\in \mathbb{F}^3 \}$. A plane through the origin is a subspace over $\mathbb{F}^3$ since $\forall x_1, x_2 \in V$
+\begin{itemize}
+\item Contains $0$, since $v0^T= 0$
+\item Closed under $+$: $v(x_1^T + x_2^T) = vx_1^T + vx_2^T= 0+0 = 0$ (distributive )
+\item Closed under scalar $\times$: $v \lambda x^T = \lambda (v x^T) = \lambda 0 = 0$  (commutative and P4)
+\end{itemize}
+
+\item[b)] $V=\{x\in\mathbb{F}^3\mid vx^T=b\}$ with  $v=(1,2,3)$ and $b=4$ is an affine set that does not contain $0$ since $v0\neq 4$. Therefor is \emph{not} a subspace. Can also be written as $v(x-x_0)^T = 0$ or $(x_1-4) + 2x_2 + 3x_3=0$.
+
+\item[c)] $V=\{x\in\mathbb{F}^3\mid x_1x_2x_3=0\}$ are the union of three planes as $x_i=0$. It includes $0$ but the linear combination of points in each plane is not in $V$, i.e. is not closed under sum: $\forall x,y\in V\; \Pi_i(x_i+y_i)-\Pi_i(x_i)-\Pi_i(y_i) \neq 0$. Each plane independently is a subspace but its union (\emph{ not sum}) in $V$ is \emph{not} a subspace.
+
+\item[d)] $V=\{x\in\mathbb{F}^3\mid x_1=5x_3\}$ is a line through the origin and is a subspace of $\mathbb{F}^3$:
+\begin{itemize}
+\item $0\in V$
+\item closed under $+$: $ x_1+y_1 = 5x_3+5y_3 = 5(x_3+y_3)$
+\item closed under scalar $\times$: $\lambda x_1 = \lambda 5x_3$
+\end{itemize}
+
+\end{enumerate}
+%------------------------------------------------------------------------ 
+\exo{}
+$V = \mathbb{I}^2 \in \mathbb{R}^2$ where every point is a pair of integers $x=(m,n)$. This case includes additive identity, is closed under sum since the sum of integers are integers, also under additive inverses since subtracting integers gives integers but \emph{not} closed under scalar multiplication since an integer times a real number is in general real.
+
+%------------------------------------------------------------------------ 
+\exo{}
+Any line or plane not crossing the origin are closed under addition and scalar multiplication but do not contain the additive identity.
+
+%------------------------------------------------------------------------ 
+\exo{}$\cap U_i$ and $U_i$ subspaces of $V$. 
+\begin{itemize}
+\item $0 \in \cap U_i$ since $0\in U_i$
+ \item $x,y \in \cap U_i \implies x,y \in U_i\; \forall i \implies x+y \in U_i\; \forall i \implies x+y\in \cap U_i$
+  \item analogous scalar product
+\end{itemize}
+therefore $\cap U_i$ is a subspace of $V$.\qed
+
+%------------------------------------------------------------------------ 
+\exo{} Let $A,B$ subspaces of $V$
+\begin{itemize}
+\item[$\leftarrow$)]$A\subset B \subset V$ then $A\cup B = B$ which is already a subspace of $V$.
+\item[$\rightarrow$)] $A\cup B$ is a subspace $V$ \hilight{... ??}
+\end{itemize}
+
+%------------------------------------------------------------------------ 
+\exo{}$U+U =\{ u+v \mid \forall u,v \in U\}$ since $U$ is a subspace of $V$ then $u+v\in U$ therefore $U+U=U$.
+
+%------------------------------------------------------------------------ 
+\exo{} yes since the sum of subspaces is a subspace and all elements in the subspace satisfy commutativity and associativity. 
+%------------------------------------------------------------------------ 
+\exo{} \begin{itemize}
+\item Any $U,I\subset V$ subspaces of $V$ such that $U + I = U$? Yes, $I = \{0\}$ is the "additive identity" subspace.
+\item $U+W = \{0\}$? \hilight{... ??}
+\end{itemize}
+%------------------------------------------------------------------------ 
+\exo{}$U_1+W = U_2 + W$ then any point $x= u_1 + w = u_2 + w'$ with $w,w'\in W$. A counterexample in $\mathbb{R}^2$ is \hilight{??}
+
+%------------------------------------------------------------------------ 
+\exo{}
+\hilight{TODO}
+%------------------------------------------------------------------------ 
+\exo{}
+\hilight{TODO}
+%------------------------------------------------------------------------ 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Finite-Dimensional Vector Spaces}
+\subsection*{Summary}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\selectlanguage{english}
+\small
+\bibliography{refs}
+\bibliographystyle{plain}
+
+\end{document}
