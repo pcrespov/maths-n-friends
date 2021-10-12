@@ -218,8 +218,35 @@ venv.bak/
 *tmp*
 *ignore*
 
-# IDE configs
-.vscode
+# IDEs config (except templates)
+.vscode/settings.json
+.vscode/launch.json
+
 
 # serialization
 *.pkl
+
+# notebooks
+**/.ipynb_checkpoints/**
+
+# latex output
+*.aux
+*.blg
+*.dvi
+*.pdf
+*.out
+*.synctex.gz
+*.toc
+*.tex~
+*.log
+*.bbl
+*.brf
+*tmp*
+*Untitled*
+__latexindent_temp.tex
+*.fls
+*.fdb_latexmk
+
+
+# mac 
+.DS_Store
