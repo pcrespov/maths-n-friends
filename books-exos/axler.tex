@@ -50,6 +50,7 @@ colorlinks=true,bookmarks=true,bookmarksnumbered=true]{hyperref}
 \renewcommand{\theparagraph}{\arabic{section}.\arabic{paragraph}}
 \newcommand{\exref}[1]{Ex.\ref{#1}}
 \newcommand{\figref}[1]{Fig.\ref{#1}}
+\newcommand{\pref}[1]{P\ref{#1}}
 \newcommand{\tbc}{\ensuremath{\ \oplus}}
 \newcommand{\exo}[1]{%
 \addtocontents{toc}{\protect\setcounter{tocdepth}{2}}%
@@ -90,12 +91,14 @@ colorlinks=true,bookmarks=true,bookmarksnumbered=true]{hyperref}
 \begin{document}
 \title{From \emph{Linear Algebra Done Right}~\cite{Axler1997}}
 \date{2015/9}
+\date{2021/10}
 \maketitle
 
 \tableofcontents
 
 \newpage
 \setcounter{section}{0}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Vector Spaces}
 \subsection*{Summary}
@@ -106,33 +109,33 @@ colorlinks=true,bookmarks=true,bookmarksnumbered=true]{hyperref}
 \item commutativity +, $\cdot$
 \item associativity +, $\cdot$
 \item identity +0, $\cdot 1$
-\item additive inverse: $\exists!w \mid z + w = 0$
-\item multiplicative inverse: $\exists!w$ and $z\neq0$ then $z\cdot w = 1$ 
+\item \emph{additive} inverse: $\exists!w \mid z + w = 0$, denoted $-z$
+\item \emph{multiplicative} inverse: $\exists!w$ and $z\neq0$ then $z\cdot w = 1$, denoted $1/w$
 \item distributive $a(b+c) = ab+ac$
 \end{itemize}
 %---
-\item A \textbf{vector space} is a set $V$ along with an addition on $V$ and a scalar multiplication on $V$:
+\item A \textbf{vector space} is a set $V$ along with an addition on $V$ and a scalar multiplication on $V$ that satisfies:
 \begin{itemize}
 \item commutativity +
 \item associativity +
 \item additive identity: $0\in V$ such that $v+0=v$ $\forall v\in V$
-\item additive inverse: $\forall v\in V,\; \exists!w\in V$ such that $v+w=0$
+\item additive inverse: $\forall v\in V,\; \exists!w\in V$ such that $v+w=0$, denoted $-v$
 \item multiplicative identify: $1v=v\;\forall v\in V$ and $1\in\mathbb{F}$
 \item distributive: $a(u+v)=au+av$ and $(a+b)u=au+bu$ $\forall a,b\in\mathbb{F}$ and $\forall u,v \in V$.
 \end{itemize}
  
-\item[P1:] A \emph{vector space} has a \emph{unique} additive identity $0$
-\item[P2:] Every \emph{element} of a vector space has a \emph{unique} additive inverse $v\leftarrow -v$
+\item[P1:\label{it:P1_1}] A \emph{vector space} has a \emph{unique} additive identity $0$
+\item[P2:\label{it:P1_2}] Every \emph{element} of a vector space has a \emph{unique} additive inverse $v\leftarrow -v$
 \item[P3:] $0v=0$ $\forall v\in V$
 \item[P4:] $a0=0$ $\forall a\in \mathbb{F}$
 \item[P5:] $(-1)v = -v$ $\forall v\in V$, i.e. the additive inverse
 
-\item \textbf{subspace}: $U\subset V$ is a subspace of $V$ if $U$ is also a vector space.
+\item \textbf{subspace}: $U\subset V$ is a subspace of $V$ if $U$ is also a vector space, that is
 \begin{itemize}
 \item has additive identity: $0\in U$
 \item closed under addition $\forall u,v \in V$: $u+v \in U$ 
 \item closed under scalar multiplication $\forall \lambda\in \mathbb{F}$ and $\forall u \in V$: $\lambda u \in U$  
-\item remaining conditions are automatically satisfied since $U\subset V$.
+\item remaining conditions for a vector space are automatically satisfied since $U\subset V$.
 \end{itemize} 
 
 \item \textbf{sum of subspaces}: $U_1+\cdots U_n = \sum U_i =\{\sum u_i\mid u_i\in U_i\}$ and $U_i\subset V$ subspaces of $V$. $\sum U_i$ is
@@ -141,13 +144,14 @@ colorlinks=true,bookmarks=true,bookmarksnumbered=true]{hyperref}
 \item the smallest subspace of $V$ that contains all $U_i$.
 \end{itemize}
 
-\item $V$ is a \textbf{direct sum of subspaces} $U_i$, written $V=U_1\oplus\cdots\oplus U_n$, if each element of $V$ can be written \emph{uniquely} as a sum $\sum u_i$, where each $u_i\in U_i$. $V=\bigoplus U_i \iff$
+\item $V$ is a \textbf{direct sum of subspaces} $U_i$, written $V=U_1\oplus\cdots\oplus U_n$, if each element of $V$ can be written \emph{uniquely} as a sum $\sum u_i$, where each $u_i\in U_i$. 
+Then $V=\bigoplus U_i \iff$
 \begin{itemize}
 \item $V = \sum U_i$
 \item $0=\sum u_i$ and $u_i=0 \in U_i$.
 \end{itemize}
 
-\item[P6:] $U,W$ subspaces of $V$ and $V=U\oplus W \iff$
+\item[P6:\label{it:P1_6}] $U,W$ subspaces of $V$ and $V=U\oplus W \iff$
 \begin{itemize}
 \item $V=U+V$
 \item $U\cap V=\{0\}$
@@ -237,18 +241,30 @@ therefore $\cap U_i$ is a subspace of $V$.\qed
 \exo{} yes since the sum of subspaces is a subspace and all elements in the subspace satisfy commutativity and associativity. 
 %------------------------------------------------------------------------ 
 \exo{} \begin{itemize}
-\item Any $U,I\subset V$ subspaces of $V$ such that $U + I = U$? Yes, $I = \{0\}$ is the "additive identity" subspace.
-\item $U+W = \{0\}$? \hilight{... ??}
+\item $\sum U_i$ is a subspace and any subspace, by \pref{it:P1_1}, has a unique additive identity. Therefore $\sum U_i + \sum 0 = \sum U_i$.
+\item In \pref{it:P1_2}, every element in a vector space has  a unique additive inverse. Therefore $\sum U_i - \sum U_i = \{0\}$.
 \end{itemize}
 %------------------------------------------------------------------------ 
-\exo{}$U_1+W = U_2 + W$ then any point $x= u_1 + w = u_2 + w'$ with $w,w'\in W$. A counterexample in $\mathbb{R}^2$ is \hilight{??}
+\exo{} No. For instance, since any line through the origin is a subspace of $\mathbf{R}^2$, then by \pref{it:P1_6}, we also know 
+that $\mathbf{R}^2$ is a direct sum of any pair of these lines (subspaces) $U_i, W$. 
+An example is
+\begin{align*}
+  U_1 &= \{(x,0) \in \mathbb{R}^2 :x \in \mathbb{R} \}  \\
+  U_2 &= \{(x,x)\in \mathbb{R}^2 :x \in \mathbb{R}  \}  \\
+  W   &= \{(0,y)\in \mathbb{R}^2 :y \in \mathbb{R}  \}  \\
+\end{align*}
+and $\mathbf{R}^2 = U_1 \oplus W = U_2 \oplus W $ .
 
 %------------------------------------------------------------------------ 
-\exo{}
-\hilight{TODO}
+\exo{} Let $W$ be a subspace of $\mathcal{P}(\mathbf{F})$ consisting of all polynomials as
+\begin{align}
+  q(z) = \sum\limits_{i\neq2,5} c_i z
+\end{align}
+then $(p+q)(z) = c_0 + c_1z + a z^2+ c_3 z^3 + c_4 z^4 + b z^5 + c_6 z^6 + ...$ and therefore $\mathcal{P}(\mathbf{F}) = U \oplus W$. 
+
 %------------------------------------------------------------------------ 
-\exo{}
-\hilight{TODO}
+\exo{} No. Counterexample: take three lines as subspaces of $V=\mathbf{R}^2$ such as $U_1=\{(x,0)\}, U_2=\{(x,x)\}, W= \{(0,x)\}$ with $x\in \mathbf{R}$. Since
+$U_i\cap W = \{0\}$ then by \pref{it:P1_6}, $\mathbf{R}^2$ is direct sum of subspaces $U_1,W$ or $U_2,W$ but still $U_1\neq U_2$. 
 %------------------------------------------------------------------------ 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
