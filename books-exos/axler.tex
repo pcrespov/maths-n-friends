@@ -104,7 +104,7 @@ colorlinks=true,bookmarks=true,bookmarksnumbered=true]{hyperref}
 \subsection*{Summary}
 % Summary -----------------------------------------------------
 \begin{itemize}
-\item \textbf{scalars} $\mathbb{F}$
+\item \textbf{scalars} $\mathbb{F}$ (i.e. fields $\mathbb{R}$ or $\mathbb{C}$)
 \begin{itemize}
 \item commutativity +, $\cdot$
 \item associativity +, $\cdot$
@@ -164,8 +164,10 @@ but \emph{only} valid for \emph{pairs} of subspaces!
 %------------------------------------------------------------------------ 
 \exo{}
 \begin{align*}
-\frac{1}{z} = \frac{z^*}{zz^*}=\frac{a-\mathrm{j}b}{a^2 + b^2}
-\end{align*}\qed
+\frac{1}{z} = 1 \frac{1}{z} = (z^* \cdot \frac{1}{z^*}) \frac{1}{z} = \frac{z^*}{zz^*}=\frac{a-\mathrm{j}b}{a^2 + b^2} = c+\mathrm{j}d
+\end{align*}
+where we use first identity, then multiplicative inverse in $\mathbb{C}$, and finally by replacing $z=a+jb$, we use distributive property 
+to get $zz^* = a^2 + b^2 $\qed
 
 %------------------------------------------------------------------------ 
 \exo{}
@@ -191,18 +193,20 @@ which is a contradiction.
 %------------------------------------------------------------------------ 
 \exo{}
 \begin{enumerate}
-\item[a)] $V=\{x\in\mathbb{F}^3\mid vx^T=0$ with $v=(1,2,3)\in \mathbb{F}^3 \}$. A plane through the origin is a subspace over $\mathbb{F}^3$ since $\forall x_1, x_2 \in V$
+\item[a)] Yes. $V=\{x\in\mathbb{F}^3\mid vx^T=0$ with $v=(1,2,3)\in \mathbb{F}^3 \}$. A plane through the origin is a subspace over $\mathbb{F}^3$ since $\forall x_1, x_2 \in V$
 \begin{itemize}
 \item Contains $0$, since $v0^T= 0$
 \item Closed under $+$: $v(x_1^T + x_2^T) = vx_1^T + vx_2^T= 0+0 = 0$ (distributive )
 \item Closed under scalar $\times$: $v \lambda x^T = \lambda (v x^T) = \lambda 0 = 0$  (commutative and P4)
 \end{itemize}
 
-\item[b)] $V=\{x\in\mathbb{F}^3\mid vx^T=b\}$ with  $v=(1,2,3)$ and $b=4$ is an affine set that does not contain $0$ since $v0\neq 4$. Therefor is \emph{not} a subspace. Can also be written as $v(x-x_0)^T = 0$ or $(x_1-4) + 2x_2 + 3x_3=0$.
+\item[b)] No. $V=\{x\in\mathbb{F}^3\mid vx^T=b\}$ with  $v=(1,2,3)$ and $b=4$ is an affine set that does not contain $0$ since $v0\neq 4$. Therefore is \emph{not} a subspace. Can also be written as $v(x-x_0)^T = 0$ or $(x_1-4) + 2x_2 + 3x_3=0$.
 
-\item[c)] $V=\{x\in\mathbb{F}^3\mid x_1x_2x_3=0\}$ are the union of three planes as $x_i=0$. It includes $0$ but the linear combination of points in each plane is not in $V$, i.e. is not closed under sum: $\forall x,y\in V\; \Pi_i(x_i+y_i)-\Pi_i(x_i)-\Pi_i(y_i) \neq 0$. Each plane independently is a subspace but its union (\emph{ not sum}) in $V$ is \emph{not} a subspace.
+\item[c)] No.  $V=\{x\in\mathbb{F}^3\mid x_1x_2x_3=0\}$ is the union of three planes $x_i=0$ (since either $x_1=0$ or $x_2=0$ or $x_3=0$ are solutions). 
+This case includes $0$ but is not closed under sum because $\forall x,y\in V$ then $\Pi_i(x_i+y_i)-\Pi_i(x_i)-\Pi_i(y_i) \neq 0$. 
+Each plane independently $x_i=0$  is a subspace but its union (careful, not it's \emph{sum}) in $V$ is \emph{not} a subspace.
 
-\item[d)] $V=\{x\in\mathbb{F}^3\mid x_1=5x_3\}$ is a line through the origin and is a subspace of $\mathbb{F}^3$:
+\item[d)]Yes. $V=\{x\in\mathbb{F}^3\mid x_1=5x_3\}$ is a line through the origin and is a subspace of $\mathbb{F}^3$:
 \begin{itemize}
 \item $0\in V$
 \item closed under $+$: $ x_1+y_1 = 5x_3+5y_3 = 5(x_3+y_3)$
