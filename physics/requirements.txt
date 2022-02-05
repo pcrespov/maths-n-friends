@@ -123,7 +123,7 @@ jupyter-server==1.9.0
     #   jupyterlab
     #   jupyterlab-server
     #   nbclassic
-jupyter-server-proxy==3.0.2
+jupyter-server-proxy==3.2.1
     # via
     #   jupyterlab-vpython
     #   vpython
@@ -134,7 +134,7 @@ jupyterlab-pygments==0.1.2
 jupyterlab-server==2.6.0
     # via jupyterlab
 jupyterlab-vpython==3.0.4
-    # via -r physics/requirements.in
+    # via -r requirements.in
 jupyterlab-widgets==1.0.0
     # via ipywidgets
 markupsafe==2.0.1
@@ -285,7 +285,7 @@ urllib3==1.26.6
     #   requests
     #   requests-unixsocket
 vpython==7.6.1
-    # via -r physics/requirements.in
+    # via -r requirements.in
 wcwidth==0.2.5
     # via prompt-toolkit
 webencodings==0.5.1
