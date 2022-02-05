@@ -111,16 +111,16 @@ colorlinks=true,bookmarks=true,bookmarksnumbered=true]{hyperref}
 \item identity +0, $\cdot 1$
 \item \emph{additive} inverse: $\exists!w \mid z + w = 0$, denoted $-z$
 \item \emph{multiplicative} inverse: $\exists!w$ and $z\neq0$ then $z\cdot w = 1$, denoted $1/w$
-\item distributive $a(b+c) = ab+ac$
+\item distributive: $a(b+c) = ab+ac$
 \end{itemize}
 %---
-\item A \textbf{vector space} is a set $V$ along with an addition on $V$ and a scalar multiplication on $V$ that satisfies:
+\item A \textbf{vector space} is a set $V$ along with an \emph{addition}  and a \emph{scalar multiplication} on $V$ that satisfies:
 \begin{itemize}
 \item commutativity +
 \item associativity +
-\item additive identity: $0\in V$ such that $v+0=v$ $\forall v\in V$
-\item additive inverse: $\forall v\in V,\; \exists!w\in V$ such that $v+w=0$, denoted $-v$
-\item multiplicative identify: $1v=v\;\forall v\in V$ and $1\in\mathbb{F}$
+\item \emph{additive} identity: $0\in V$ such that $v+0=v$ $\forall v\in V$
+\item \emph{additive} inverse: $\forall v\in V,\; \exists!w\in V$ such that $v+w=0$, denoted $-v$
+\item \emph{multiplicative} identify: $1v=v\;\forall v\in V$ and $1\in\mathbb{F}$
 \item distributive: $a(u+v)=au+av$ and $(a+b)u=au+bu$ $\forall a,b\in\mathbb{F}$ and $\forall u,v \in V$.
 \end{itemize}
  
@@ -136,6 +136,12 @@ colorlinks=true,bookmarks=true,bookmarksnumbered=true]{hyperref}
 \item closed under addition $\forall u,v \in V$: $u+v \in U$ 
 \item closed under scalar multiplication $\forall \lambda\in \mathbb{F}$ and $\forall u \in V$: $\lambda u \in U$  
 \item remaining conditions for a vector space are automatically satisfied since $U\subset V$.
+\item Examples: \emph{the only} subspaces of ...
+\begin{itemize}
+  \item $\mathbf{R}^2$ are $\{0\}, \mathbf{R}^2$ and all lines in $\mathbf{R}^2$ through the origin
+  \item $\mathbf{R}^3$ are $\{0\}, \mathbf{R}^3$ and all lines, and all planes in $\mathbf{R}^2$ through the origin
+\end{itemize}
+
 \end{itemize} 
 
 \item \textbf{sum of subspaces}: $U_1+\cdots U_n = \sum U_i =\{\sum u_i\mid u_i\in U_i\}$ and $U_i\subset V$ subspaces of $V$. $\sum U_i$ is
@@ -202,7 +208,7 @@ which is a contradiction.
 
 \item[b)] No. $V=\{x\in\mathbb{F}^3\mid vx^T=b\}$ with  $v=(1,2,3)$ and $b=4$ is an affine set that does not contain $0$ since $v0\neq 4$. Therefore is \emph{not} a subspace. Can also be written as $v(x-x_0)^T = 0$ or $(x_1-4) + 2x_2 + 3x_3=0$.
 
-\item[c)] No.  $V=\{x\in\mathbb{F}^3\mid x_1x_2x_3=0\}$ is the union of three planes $x_i=0$ (since either $x_1=0$ or $x_2=0$ or $x_3=0$ are solutions). 
+\item[c)] No.  $V=\{x\in\mathbb{F}^3\mid x_1x_2x_3=0\}$ is the \emph{union} of three planes $x_i=0$ (since either $x_1=0$ or $x_2=0$ or $x_3=0$ are solutions). 
 This case includes $0$ but is not closed under sum because $\forall x,y\in V$ then $\Pi_i(x_i+y_i)-\Pi_i(x_i)-\Pi_i(y_i) \neq 0$. 
 Each plane independently $x_i=0$  is a subspace but its union (careful, not it's \emph{sum}) in $V$ is \emph{not} a subspace.
 
@@ -219,15 +225,17 @@ Each plane independently $x_i=0$  is a subspace but its union (careful, not it's
 $V = \mathbb{I}^2 \in \mathbb{R}^2$ where every point is a pair of integers $x=(m,n)$. This case includes additive identity, is closed under sum since the sum of integers are integers, also under additive inverses since subtracting integers gives integers but \emph{not} closed under scalar multiplication since an integer times a real number is in general real.
 
 %------------------------------------------------------------------------ 
-\exo{}
-Any line or plane not crossing the origin are closed under addition and scalar multiplication but do not contain the additive identity.
+\exo{} Intuitively, we need to find a set with "a shape" that can scale and does not change (i.e. close in scalar multiplication). 
+For instance, take "a cross" $ U = \{ (x,y) \mid x.y = 0 \}$ is close in scalar multiplication, includes $\{0\}$ but is \emph{not} close in addition
+therefore is not a subspace or $\mathbb{F}^2$.
+
 
 %------------------------------------------------------------------------ 
 \exo{}$\cap U_i$ and $U_i$ subspaces of $V$. 
 \begin{itemize}
 \item $0 \in \cap U_i$ since $0\in U_i$
- \item $x,y \in \cap U_i \implies x,y \in U_i\; \forall i \implies x+y \in U_i\; \forall i \implies x+y\in \cap U_i$
-  \item analogous scalar product
+\item $x,y \in \cap U_i \implies x,y \in U_i\; \forall i \implies x+y \in U_i\; \forall i \implies x+y\in \cap U_i$
+\item analogous scalar product
 \end{itemize}
 therefore $\cap U_i$ is a subspace of $V$.\qed
 
@@ -235,7 +243,7 @@ therefore $\cap U_i$ is a subspace of $V$.\qed
 \exo{} Let $A,B$ subspaces of $V$
 \begin{itemize}
 \item[$\leftarrow$)]$A\subset B \subset V$ then $A\cup B = B$ which is already a subspace of $V$.
-\item[$\rightarrow$)] $A\cup B$ is a subspace $V$ \hilight{... ??}
+\item[$\rightarrow$)] $A\cup B$ is a subspace $V$.  $a+b \in B$ with $a\in A$, $b\in B$. Then $ (a + b) - b \in B$ because $-b\in B$, but then $a + b - b = a \in B$ so $A\in B$.
 \end{itemize}
 
 %------------------------------------------------------------------------ 
@@ -243,19 +251,20 @@ therefore $\cap U_i$ is a subspace of $V$.\qed
 
 %------------------------------------------------------------------------ 
 \exo{} yes since the sum of subspaces is a subspace and all elements in the subspace satisfy commutativity and associativity. 
+
 %------------------------------------------------------------------------ 
 \exo{} \begin{itemize}
 \item $\sum U_i$ is a subspace and any subspace, by \pref{it:P1_1}, has a unique additive identity. Therefore $\sum U_i + \sum 0 = \sum U_i$.
-\item In \pref{it:P1_2}, every element in a vector space has  a unique additive inverse. Therefore $\sum U_i - \sum U_i = \{0\}$.
+\item  Is there $V$ such that $U+V = \{0\}$? Only the subspace $\{0\}$ because if we make a set of all the additive inverses of a subspace $-U = {-u \mid u\in U}$ then we end up with the subspace itself: $ U - U = U$. 
 \end{itemize}
 %------------------------------------------------------------------------ 
 \exo{} No. For instance, since any line through the origin is a subspace of $\mathbf{R}^2$, then by \pref{it:P1_6}, we also know 
 that $\mathbf{R}^2$ is a direct sum of any pair of these lines (subspaces) $U_i, W$. 
 An example is
 \begin{align*}
-  U_1 &= \{(x,0) \in \mathbb{R}^2 :x \in \mathbb{R} \}  \\
-  U_2 &= \{(x,x)\in \mathbb{R}^2 :x \in \mathbb{R}  \}  \\
-  W   &= \{(0,y)\in \mathbb{R}^2 :y \in \mathbb{R}  \}  \\
+  U_1 &= \{(x,0)\in \mathbb{R}^2 :x \in \mathbb{R} \}  \\
+  U_2 &= \{(x,x)\in \mathbb{R}^2 :x \in \mathbb{R} \}  \\
+  W   &= \{(0,y)\in \mathbb{R}^2 :y \in \mathbb{R} \}  \\
 \end{align*}
 and $\mathbf{R}^2 = U_1 \oplus W = U_2 \oplus W $ .
 
@@ -267,7 +276,7 @@ and $\mathbf{R}^2 = U_1 \oplus W = U_2 \oplus W $ .
 then $(p+q)(z) = c_0 + c_1z + a z^2+ c_3 z^3 + c_4 z^4 + b z^5 + c_6 z^6 + ...$ and therefore $\mathcal{P}(\mathbf{F}) = U \oplus W$. 
 
 %------------------------------------------------------------------------ 
-\exo{} No. Counterexample: take three lines as subspaces of $V=\mathbf{R}^2$ such as $U_1=\{(x,0)\}, U_2=\{(x,x)\}, W= \{(0,x)\}$ with $x\in \mathbf{R}$. Since
+\exo{} No. Counterexample: take three lines as subspaces of $V=\mathbf{R}^2$ such as $U_1=\{(x,0)\}, U_2=\{(x,x)\}, W=\{(0,x)\}$ with $x\in \mathbf{R}$. Since
 $U_i\cap W = \{0\}$ then by \pref{it:P1_6}, $\mathbf{R}^2$ is direct sum of subspaces $U_1,W$ or $U_2,W$ but still $U_1\neq U_2$. 
 %------------------------------------------------------------------------ 
 
