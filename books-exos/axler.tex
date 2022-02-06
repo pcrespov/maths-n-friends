@@ -138,13 +138,13 @@ and the only choice is $a_1=\cdots=a_n=0$. Otherwise is \textbf{linearly depende
   \item we declare empty list $()$ as l.i.
 \end{itemize}
 
-\item[L2.4]\emph{Linear Dependence Lemma}: If $(v_1, \cdots, v_m)$ l.d. in $V$ and $v_1\neq 0$ then $\exists j\in 2,\cdots m$ such that
+\item[L4]\emph{Linear Dependence Lemma}: If $(v_1, \cdots, v_m)$ l.d. in $V$ and $v_1\neq 0$ then $\exists j\in 2,\cdots m$ such that
 \begin{itemize}
   \item $v_j \in \mathrm{span}(v_1,\cdots, v_{j-1})$
   \item  $\mathrm{span}(v_1,\cdots, v_{j-1}, v_{j+1}, \cdots, v_m) = \mathrm{span}(v_1,\cdots, v_m)$
 \end{itemize}
-\item[T2.6:\label{it:T2_6}] In a \emph{finite} dimensional vector space, the \emph{length}(of every list of indepedent vectors) $\leq$ of the \emph{length}(of every spanning list of vectors)
-\item[P2.7:] Every subspace $S$ of a \emph{finite}-dimensional vector space $V$ (i.e. $S\subset V$) is also \emph{finite}-dimensional
+\item[T6:\label{it:T2_6}] In a \emph{finite} dimensional vector space, the \emph{length}(of every list of indepedent vectors) $\leq$ of the \emph{length}(of every spanning list of vectors)
+\item[P7:] Every subspace $S$ of a \emph{finite}-dimensional vector space $V$ (i.e. $S\subset V$) is also \emph{finite}-dimensional
 %
 
 \item A \textbf{basis} of a vector space $V$ is a list of vectors in $V$ that is \emph{linearly indepedent} and \emph{spans} $V$.
@@ -165,9 +165,13 @@ and the only choice is $a_1=\cdots=a_n=0$. Otherwise is \textbf{linearly depende
 \end{itemize}
 \item[P15:] if $U$  subspace of finite-dimensional $V$ $\implies$ $\dimension{U}\leq\dimension{V}$.
 %
-\item[P16/17:]Every spanning/linearly-independent list of vectors in $V$ with the right length ($=\dimension{V}$) is a basis of $V$ 
+\item[P16/17] If a list has the right lenght, only need to verify one of the props to be base: either span or l.i.:
+\begin{itemize}
+  \item[P16:\label{it:T2_16}]Every spanning list of vectors in $V$ reduced to a length $\dimension{V}$ is a basis of $V$ 
+  \item[P17:\label{it:T2_17}]Every linearly-independent list of vectors in $V$ extended to a lenght $\dimension{V}$ is a basis of $V$
+\end{itemize}
 %
-\item[T18:] If $U_1,U_2$ subspaces of a finite-dimensional vector space then 
+\item[T18:\label{it:T2_18}] If $U_1,U_2$ subspaces of a finite-dimensional vector space then 
 \begin{align*}
 \dimension(U_1+U_2)=\dimension(U_1)+\dimension(U_2) - \dimension(U_1\cap U_2)
 \end{align*}
@@ -226,14 +230,42 @@ as $ u = \alpha \underbrace{(3 , 1, 0, 0, 0)}_{u_1} + \beta\underbrace{(0 , 0, 7
 \exo{} Yes. The list ($1$, $z$, $z^3+z^2$, $z^3$) is a base of $\mathcal{P}_3(\mathbf{F})$ and none of the polynomials (vectors) have degree 2. Note that $z^2 = \mathbf{p}_2 - \mathbf{p}_3$.
 
 %------------------------------------------------------------------------ 
-\exo{} $V$ with $\mathrm{dim}V = n$ then there is a base $(v_1, \cdot, v_n)$ which by definition $u = \sum a_i v_i$ and $a_i$ are unique. 
+\exo{} $V$ with $\mathrm{dim}V = n$ then there is a base $(v_1, \cdots, v_n)$ which by definition $u = \sum a_i v_i$ and $a_i$ are unique. 
 Take each of $v_i$ to span a one dimensional subspace $U_i$, we clearly have that $ V = \bigoplus U_i $
 
 
 %------------------------------------------------------------------------ 
-\exo{}
-\hilight{TODO}
+\exo{}  Let $B_1$ bases of subspace $U\subseteq V $, then the list $B_1$ is also l.i. in $V$ with length $\dimension{U} = \dimension{V}$ 
+therefore, by \pref{it:T2_17}, is also a bases of $V$ which means that both are the same set $U=V$. 
 
+
+%------------------------------------------------------------------------ 
+\exo{} $a_i=0$ is not the only solution $\forall z\in \mathbf{F}$ for $\sum a_i \mathbf{p}_i(z) = 0$ since at $z=2$
+all polynomials have a root, i.e. $\mathbf{p}_i(2)=0$.  Therefore it cannot be linearly indepedent. 
+
+%------------------------------------------------------------------------ 
+\exo{} By \tref{it:T2_18}, 
+\begin{align*}
+  \underbrace{\dimension{R^8}}_8 = \dimension{U+W} = \underbrace{\dimension{U}}_3 + \underbrace{\dimension{W}}_5 - \dimension{U \cap W} \implies \dimension{U \cap W} = 0
+\end{align*}
+which leads to the only subspace dimensionless, i.e. $U\cup W = \{0\}$
+%------------------------------------------------------------------------ 
+\exo{} Following previous reasoning leads to $ \dimension{U \cap W} = 1 \implies U\cap W \neq \{0\}$
+
+%------------------------------------------------------------------------ 
+\exo{} Using \tref{it:T2_18}
+\begin{align*}
+  \dimension{(U_1+ U_2 + U_3) } = \dimension{U_1} +  \dimension{U_2} + \dimension{U_3} - \dimension{(U_2\cap U_3)}  - \dimension{(U_1\cap (U_2+U_3)) }
+\end{align*}
+If $U_1 \cap (U_2 + U_3) = U_1 \cap U_2 + U_1 \cap U_3 $ \hilight{??} then $\dimension{(U_1 \cap U_2 + U_1 \cap U_3 ) } = \dimension{U_1 \cap U_2} +  \dimension{ U_1 \cap U_3}  - \dimension{( U_1 \cap U_2\cap U_3)} $
+
+%------------------------------------------------------------------------ 
+\exo{}  Using \tref{it:T2_18} we have that $\dimension{  \sum U_i  } = \sum \dimension{U_i} - \underbrace{\dimension{ (U_1 \cap \sum_{j>1} U_j) }}_{\ge 0}  $
+$\implies  \dimension{  \sum U_i  } \leq \sum \dimension{U_i}  $
+
+%------------------------------------------------------------------------ 
+
+\exo{} Following from previous result, $U_1 \cap \bigoplus\limits_{j>1} U_j = \{0\}$ because the bases of each $U_i$ are l.i. .
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
