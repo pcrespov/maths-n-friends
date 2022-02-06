@@ -50,7 +50,9 @@ colorlinks=true,bookmarks=true,bookmarksnumbered=true]{hyperref}
 \renewcommand{\theparagraph}{\arabic{section}.\arabic{paragraph}}
 \newcommand{\exref}[1]{Ex.\ref{#1}}
 \newcommand{\figref}[1]{Fig.\ref{#1}}
-\newcommand{\pref}[1]{P\ref{#1}}
+\newcommand{\pref}[1]{Pr.\ref{#1}}
+\newcommand{\tref}[1]{Th.\ref{#1}}
+
 \newcommand{\tbc}{\ensuremath{\ \oplus}}
 \newcommand{\exo}[1]{%
 \addtocontents{toc}{\protect\setcounter{tocdepth}{2}}%
@@ -109,33 +111,129 @@ colorlinks=true,bookmarks=true,bookmarksnumbered=true]{hyperref}
 \section{Finite-Dimensional Vector Spaces}
 \subsection*{Summary}
 \begin{itemize}
-\item A list of vectors $(v_1,\cdots,v_n)$ is \textbf{linearly independent} in a vector space $V$ $\iff 0 = \sum a_i v_i$
-and the only choice is $a_1=\cdots=a_n=0$.
-%
-\item \textbf{Basis} of vector space $V$ is a list of vectors in $V$ that is \emph{linearly indepedent} and \emph{spans} $V$.
+\item \textbf{linear combination} of a list $(v_1, \cdots, v_m)$ of vectors in $V$ is a vector $u = \sum a_i v_i$ with $a_i\in \mathbf{F}$
+\item \textbf{span} of $(v_1, \cdots, v_m)$ is the set $\mathrm{span}(v_1, \cdots, v_m) = \{ \sum a_i v_i \mid a_i\in\mathbf{F}\}$
 \begin{itemize}
-\item $(e_1, \cdots, e_n)$ where $e_i=(0,\cdots, \underbrace{1}_{i},\cdots,0)\in\mathbf{F}^n$ is the standard basis of $\mathbf{F}^n$. 
+  \item is the set of all linear combinations
+  \item is a subspace of $V$
+  \item for an empty list: $\mathrm{span}() = \{0\}$
+  \item if $\mathrm{span}(v_1, \cdots, v_m) = V$ (i.e. $(v_1, \cdots, v_m)$ spans $V$ ) then $\mathrm{span}(v_1, \cdots, v_m)$ is \emph{the smallest subspace} in $V$
+  \item a vector space $V$ is \textbf{finite dimensional} if exists a finite list $(v_1, \cdots, v_m)$ that spans $V$
 \end{itemize}
-\item[P8] A list $(v_1,\cdots,v_n)$ of vectors in $V$ is a basis of $V$ $\iff$ $\forall v\in V$ can be written uniquely as a linear combination of these vectors $v=\sum a_i v_i$.
-\item[T10/12] Every spanning/linearly independent  list of vectors in a finite-dimensional vector space can be \emph{reduced}/\emph{extended} to a basis of the vector space.
-\item[C11] Every finite dimensional vector space \emph{has} a basis.
-\item[T13] $V$ finite dimensional and $U$ subspace of $V$ $\implies$ there is a subspace $W$ of $V$ such that $V=U\oplus W$.
+\item A polynomial $p(z)$ 
+\begin{itemize}
+  \item has \textbf{degree} $m$ if $p(z)=a_0+a_1z+\cdots+a_mz^m$ with $a_i\in \mathbf{F}$ and $a_m\neq 0$
+  \item $p(z)=0$ has degree $-\infty$
+  \item $\mathcal{P}_m(\mathbf{F})$ set of all polynomials with degree $\leq m$
+  \item $\mathcal{P}_m(\mathbf{F})$ is a finite dimensional subspace of $\mathcal{P}(\mathbf{F})$
+\end{itemize}
+\item none finite dimensional spaces are \textbf{infinite dimensional} ex. $\mathcal{P}(\mathbf{F})$ or $\mathbf{F}^\infty$
+\item A list of vectors $(v_1,\cdots,v_n)$ is \textbf{linearly independent} in $V$ $\iff 0 = \sum a_i v_i$
+and the only choice is $a_1=\cdots=a_n=0$. Otherwise is \textbf{linearly dependent}
+\begin{itemize}
+  \item a list $(v,)$ of length 1 is l.i. iff $v\neq 0$
+  \item a list of length 2 is l.i. neither vector is scalar multiple of the other
+  \item a list of length 3 or more is l.d. even thought no vector in the list is scalar multiple of another!
+  \item removing vectors from a l.i. list remains l.i.
+  \item we declare empty list $()$ as l.i.
+\end{itemize}
+
+\item[L2.4]\emph{Linear Dependence Lemma}: If $(v_1, \cdots, v_m)$ l.d. in $V$ and $v_1\neq 0$ then $\exists j\in 2,\cdots m$ such that
+\begin{itemize}
+  \item $v_j \in \mathrm{span}(v_1,\cdots, v_{j-1})$
+  \item  $\mathrm{span}(v_1,\cdots, v_{j-1}, v_{j+1}, \cdots, v_m) = \mathrm{span}(v_1,\cdots, v_m)$
+\end{itemize}
+\item[T2.6:\label{it:T2_6}] In a \emph{finite} dimensional vector space, the \emph{length}(of every list of indepedent vectors) $\leq$ of the \emph{length}(of every spanning list of vectors)
+\item[P2.7:] Every subspace $S$ of a \emph{finite}-dimensional vector space $V$ (i.e. $S\subset V$) is also \emph{finite}-dimensional
 %
-\item The \textbf{dimension} of a finite-dimensional vectors spaces is the \emph{length} of any basis of the vector space.
-\item[P15] $V$ finite dimensional and $U$ subspace of $V$ $\implies$ $\dimension{U}\leq\dimension{V}$.
+
+\item A \textbf{basis} of a vector space $V$ is a list of vectors in $V$ that is \emph{linearly indepedent} and \emph{spans} $V$.
+\begin{itemize}
+\item $(e_1, \cdots, e_n)$ where $e_i=(0,\cdots, \underbrace{1}_{i},\cdots,0)\in\mathbf{F}^n$ is the \textbf{standard basis} of $\mathbf{F}^n$. 
+\item By \tref{it:T2_6}, a basis of $V$ is the smallest list of l.i. vectors that spans $V$
+\end{itemize}
+\item[P8:] A list $(v_1,\cdots,v_n)$ of vectors in $V$ is a basis of $V$ $\iff$ $\forall v\in V$ can be written uniquely as a linear combination of these vectors $v=\sum a_i v_i$.
+\item[T10/12:] Every \emph{spanning/linearly independent}  list of vectors in a finite-dimensional vector space can be \emph{reduced}/\emph{extended} to a basis of the vector space.
+\item[C11:] Every finite dimensional vector space \emph{has} a basis.
+\item[P13:] $V$ finite dimensional and $U$ subspace of $V$ $\implies$ there is a subspace $W$ of $V$ such that $V=U\oplus W$.
 %
-\item[P16/17]Every spanning/linearly independent list of vectors in $V$ with the right length ($=\dimension{V}$) is a basis of $V$ 
+\item[T14:] Any two bases of a finite-dimensional vector space have the same length
+\item The \textbf{dimension} of a finite-dimensional vector space $\dimension{V}$ is the \emph{length} of any basis of the vector space
+\begin{itemize}
+  \item $\dimension{\mathbf{F}^n} = n$
+  \item $\mathcal{P}(\mathrm{F}_m) = m+1$
+\end{itemize}
+\item[P15:] if $U$  subspace of finite-dimensional $V$ $\implies$ $\dimension{U}\leq\dimension{V}$.
 %
-\item[T18] If $U_1,U_2$ subspaces of a finite-dimensional vector space then 
+\item[P16/17:]Every spanning/linearly-independent list of vectors in $V$ with the right length ($=\dimension{V}$) is a basis of $V$ 
+%
+\item[T18:] If $U_1,U_2$ subspaces of a finite-dimensional vector space then 
 \begin{align*}
 \dimension(U_1+U_2)=\dimension(U_1)+\dimension(U_2) - \dimension(U_1\cap U_2)
 \end{align*}
-\item[P19] $V$ finite dimensional vector space and $U_1,\cdots,U_m$ subspaces of $V$ such that $V=\sum U_i$ and $\dimension{V}=\sum_i\dimension{U_i}$ then $V=\bigoplus U_i$
+\item[P19:\label{it:T2_19}] $V$ finite dimensional vector space and $U_1,\cdots,U_m$ subspaces of $V$ such that 
+\begin{itemize}
+  \item $V=\sum U_i$
+  \item $\dimension{V}=\sum\dimension{U_i}$
 \end{itemize}
-\hilight{TODO}
+ then $V=U_1 \oplus \cdots \oplus U_n = \bigoplus U_i$
+\end{itemize}
+
+
+
 %------------------------------------------------------------------------ 
 \subsection*{Exercises}
-\hilight{TODO a limpio}
+%------------------------------------------------------------------------ 
+\exo{}
+By definition, the $\mathrm{span}(v_1,\cdots,v_n)$ is a set of all linear combination of the list. Since 
+the new list has the same lenght and every element is itself a l.c. of two of them $u_i = v_i-v_{i+1}$, 
+then both sets are identical \qed
+
+%------------------------------------------------------------------------ 
+\exo{} If $(v_1,\cdots,v_n)$ is l.i. in $V$ then $\sum a_i v_i = 0$ and $a_i = 0\; \forall i$, so any l.c. of the new list 
+\begin{align*}
+  c_1 (v_1 - v_2) + c_2 (v_2 - v_3) + \cdots + c_n v_n &= 0\\
+  c_1 v_1 + (c_2 - c_1) v_2 + \cdots (c_n - c_{n-1})v_n &= 0
+\end{align*}
+so $c_1=0$, $c_2 = c_1$, ...  so it is l.i. as well \qed
+%------------------------------------------------------------------------ 
+\exo{} Let $\sum a_i (v_i + w) = \sum a_i v_i + (\sum a_i) w = 0$ and since some $a_j\neq 0$ then $\sum a_i\neq 0$ 
+which leads to $w = \sum \frac{-a_i}{\sum a_i} v_i$ \qed 
+
+%------------------------------------------------------------------------ 
+\exo{} No, since it is not close in addition. E.g. the sum of two of its elements $ (1 + z^m) + (- z^m) = 1  $ 
+results in a polynomial with smaller degree. In contrast note that $\mathcal{P}(\mathrm{F}_m)$ (with degree $\leq$ m ) 
+\emph{is} a subspace. 
+
+%------------------------------------------------------------------------ 
+\exo{}
+\hilight{TODO}
+
+%------------------------------------------------------------------------ 
+\exo{}
+\hilight{TODO}
+
+%------------------------------------------------------------------------ 
+\exo{}
+\hilight{TODO}
+
+%------------------------------------------------------------------------ 
+\exo{} $\forall u\in U$ is given by $u = (3\alpha , \alpha, 7\beta, \beta, \lambda)$ with $\alpha,\beta,\lambda \in \mathbf{R}$, which can be written 
+as $ u = \alpha \underbrace{(3 , 1, 0, 0, 0)}_{u_1} + \beta\underbrace{(0 , 0, 7, 1, 0)}_{u_2} + \lambda \underbrace{(0 , 0, 0, 0, 1)}_{u_3} $ therefore 
+ $(u_1,u_2,u_3)$ span $U$. In addition, they are l.i. in $\mathbf{R}^5$ and therefore a base of $U$.
+
+%------------------------------------------------------------------------ 
+\exo{} Yes. The list ($1$, $z$, $z^3+z^2$, $z^3$) is a base of $\mathcal{P}_3(\mathbf{F})$ and none of the polynomials (vectors) have degree 2. Note that $z^2 = \mathbf{p}_2 - \mathbf{p}_3$.
+
+%------------------------------------------------------------------------ 
+\exo{} $V$ with $\mathrm{dim}V = n$ then there is a base $(v_1, \cdot, v_n)$ which by definition $u = \sum a_i v_i$ and $a_i$ are unique. 
+Take each of $v_i$ to span a one dimensional subspace $U_i$, we clearly have that $ V = \bigoplus U_i $
+
+
+%------------------------------------------------------------------------ 
+\exo{}
+\hilight{TODO}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
