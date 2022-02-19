@@ -123,7 +123,7 @@ colorlinks=true,bookmarks=true,bookmarksnumbered=true]{hyperref}
 \item A polynomial $p(z)$ 
 \begin{itemize}
   \item has \textbf{degree} $m$ if $p(z)=a_0+a_1z+\cdots+a_mz^m$ with $a_i\in \mathbf{F}$ and $a_m\neq 0$
-  \item $p(z)=0$ has degree $-\infty$
+  \item $p(z)=0$ has degree $-\infty$ ???
   \item $\mathcal{P}_m(\mathbf{F})$ set of all polynomials with degree $\leq m$
   \item $\mathcal{P}_m(\mathbf{F})$ is a finite dimensional subspace of $\mathcal{P}(\mathbf{F})$
 \end{itemize}
@@ -189,9 +189,12 @@ and the only choice is $a_1=\cdots=a_n=0$. Otherwise is \textbf{linearly depende
 \subsection*{Exercises}
 %------------------------------------------------------------------------ 
 \exo{}
-By definition, the $\mathrm{span}(v_1,\cdots,v_n)$ is a set of all linear combination of the list. Since 
-the new list has the same lenght and every element is itself a l.c. of two of them $u_i = v_i-v_{i+1}$, 
-then both sets are identical \qed
+\begin{align*}
+a_1(v_1 - v_2) + a_2 (v_2 - v_3) + \cdots + a_{n-1} (v_{n-1} - v_n) + v_n = \\
+a_1 v_1 + (a_1 - a_2) v_2 + \cdots + (1 - a_{n-1}) v_n 
+\end{align*}
+since the latter spans V, then $0 \neq a_1\neq a_2 \cdots$ 
+\qed
 
 %------------------------------------------------------------------------ 
 \exo{} If $(v_1,\cdots,v_n)$ is l.i. in $V$ then $\sum a_i v_i = 0$ and $a_i = 0\; \forall i$, so any l.c. of the new list 
@@ -206,7 +209,7 @@ which leads to $w = \sum \frac{-a_i}{\sum a_i} v_i$ \qed
 
 %------------------------------------------------------------------------ 
 \exo{} No, since it is not close in addition. E.g. the sum of two of its elements $ (1 + z^m) + (- z^m) = 1  $ 
-results in a polynomial with smaller degree. In contrast note that $\mathcal{P}(\mathrm{F}_m)$ (with degree $\leq$ m ) 
+results in a polynomial with smaller degree. In contrast note that $\mathcal{P}(\mathrm{F}_m)$ (with degree $\leq m$ ) 
 \emph{is} a subspace. 
 
 %------------------------------------------------------------------------ 
@@ -242,30 +245,35 @@ therefore, by \pref{it:T2_17}, is also a bases of $V$ which means that both are 
 %------------------------------------------------------------------------ 
 \exo{} $a_i=0$ is not the only solution $\forall z\in \mathbf{F}$ for $\sum a_i \mathbf{p}_i(z) = 0$ since at $z=2$
 all polynomials have a root, i.e. $\mathbf{p}_i(2)=0$.  Therefore it cannot be linearly indepedent. 
+\hilight{???}
 
 %------------------------------------------------------------------------ 
 \exo{} By \tref{it:T2_18}, 
 \begin{align*}
   \underbrace{\dimension{R^8}}_8 = \dimension{U+W} = \underbrace{\dimension{U}}_3 + \underbrace{\dimension{W}}_5 - \dimension{U \cap W} \implies \dimension{U \cap W} = 0
 \end{align*}
-which leads to the only subspace dimensionless, i.e. $U\cup W = \{0\}$
+which leads to the only subspace dimensionless, i.e. $U \cap W = \{0\}$
 %------------------------------------------------------------------------ 
 \exo{} Following previous reasoning leads to $ \dimension{U \cap W} = 1 \implies U\cap W \neq \{0\}$
 
 %------------------------------------------------------------------------ 
-\exo{} Using \tref{it:T2_18}
-\begin{align*}
-  \dimension{(U_1+ U_2 + U_3) } = \dimension{U_1} +  \dimension{U_2} + \dimension{U_3} - \dimension{(U_2\cap U_3)}  - \dimension{(U_1\cap (U_2+U_3)) }
-\end{align*}
-If $U_1 \cap (U_2 + U_3) = U_1 \cap U_2 + U_1 \cap U_3 $ \hilight{??} then $\dimension{(U_1 \cap U_2 + U_1 \cap U_3 ) } = \dimension{U_1 \cap U_2} +  \dimension{ U_1 \cap U_3}  - \dimension{( U_1 \cap U_2\cap U_3)} $
+\exo{} No. Take $u_1,u_2,u_3$ three vectors in $\mathbf{R}^2$ and bases spanning $U_1, U_2, U_3$ resp., then 
+\begin{enumerate}
+  \item $\dimension{(U_1+U_2+U_3)} = \dimension{\mathbf{R}^2} = 2$
+  \item $\dimension{U_i} = 1$
+  \item $U_i\cap U_j = \{0\}$ for $i\neq j$ 
+\end{enumerate} 
+but then $\dimension{(U_1+U_2+U_3)} \neq \dimension{U_1} + \dimension{U_2} + \dimension{U_3} - 0 - ... + 0$.
+
+
 
 %------------------------------------------------------------------------ 
-\exo{}  Using \tref{it:T2_18} we have that $\dimension{  \sum U_i  } = \sum \dimension{U_i} - \underbrace{\dimension{ (U_1 \cap \sum_{j>1} U_j) }}_{\ge 0}  $
+\exo{}  Using \tref{it:T2_18} we have that $\dimension{  \sum U_i  } = \sum \dimension{U_i} - \sum \underbrace{\dimension{ (U_i \cap \sum_{j>i} U_j) }}_{\ge 0}  $
 $\implies  \dimension{  \sum U_i  } \leq \sum \dimension{U_i}  $
 
 %------------------------------------------------------------------------ 
 
-\exo{} Following from previous result, $U_1 \cap \bigoplus\limits_{j>1} U_j = \{0\}$ because the bases of each $U_i$ are l.i. .
+\exo{} Following from previous result, $U_i \cap \bigoplus\limits_{j>i} U_j = \{0\}$ because the bases of each $U_i$ are l.i. .
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
