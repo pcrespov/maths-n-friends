@@ -100,181 +100,10 @@ colorlinks=true,bookmarks=true,bookmarksnumbered=true]{hyperref}
 
 \newpage
 \setcounter{section}{0}
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \input{axler.01.tex}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
-\section{Finite-Dimensional Vector Spaces}
-\subsection*{Summary}
-\begin{itemize}
-\item \textbf{linear combination} of a list $(v_1, \cdots, v_m)$ of vectors in $V$ is a vector $u = \sum a_i v_i$ with $a_i\in \mathbf{F}$
-\item \textbf{span} of $(v_1, \cdots, v_m)$ is the set $\mathrm{span}(v_1, \cdots, v_m) = \{ \sum a_i v_i \mid a_i\in\mathbf{F}\}$
-\begin{itemize}
-  \item is the set of all linear combinations
-  \item is a subspace of $V$
-  \item for an empty list: $\mathrm{span}() = \{0\}$
-  \item if $\mathrm{span}(v_1, \cdots, v_m) = V$ (i.e. $(v_1, \cdots, v_m)$ spans $V$ ) then $\mathrm{span}(v_1, \cdots, v_m)$ is \emph{the smallest subspace} in $V$
-  \item a vector space $V$ is \textbf{finite dimensional} if exists a finite list $(v_1, \cdots, v_m)$ that spans $V$
-\end{itemize}
-\item A polynomial $p(z)$ 
-\begin{itemize}
-  \item has \textbf{degree} $m$ if $p(z)=a_0+a_1z+\cdots+a_mz^m$ with $a_i\in \mathbf{F}$ and $a_m\neq 0$
-  \item $p(z)=0$ has degree $-\infty$ ???
-  \item $\mathcal{P}_m(\mathbf{F})$ set of all polynomials with degree $\leq m$
-  \item $\mathcal{P}_m(\mathbf{F})$ is a finite dimensional subspace of $\mathcal{P}(\mathbf{F})$
-\end{itemize}
-\item none finite dimensional spaces are \textbf{infinite dimensional} ex. $\mathcal{P}(\mathbf{F})$ or $\mathbf{F}^\infty$
-\item A list of vectors $(v_1,\cdots,v_n)$ is \textbf{linearly independent} in $V$ $\iff 0 = \sum a_i v_i$
-and the only choice is $a_1=\cdots=a_n=0$. Otherwise is \textbf{linearly dependent}
-\begin{itemize}
-  \item a list $(v,)$ of length 1 is l.i. iff $v\neq 0$
-  \item a list of length 2 is l.i. neither vector is scalar multiple of the other
-  \item a list of length 3 or more is l.d. even thought no vector in the list is scalar multiple of another!
-  \item removing vectors from a l.i. list remains l.i.
-  \item we declare empty list $()$ as l.i.
-\end{itemize}
-
-\item[L4]\emph{Linear Dependence Lemma}: If $(v_1, \cdots, v_m)$ l.d. in $V$ and $v_1\neq 0$ then $\exists j\in 2,\cdots m$ such that
-\begin{itemize}
-  \item $v_j \in \mathrm{span}(v_1,\cdots, v_{j-1})$
-  \item  $\mathrm{span}(v_1,\cdots, v_{j-1}, v_{j+1}, \cdots, v_m) = \mathrm{span}(v_1,\cdots, v_m)$
-\end{itemize}
-\item[T6:\label{it:T2_6}] In a \emph{finite} dimensional vector space, the \emph{length}(of every list of indepedent vectors) $\leq$ of the \emph{length}(of every spanning list of vectors)
-\item[P7:] Every subspace $S$ of a \emph{finite}-dimensional vector space $V$ (i.e. $S\subset V$) is also \emph{finite}-dimensional
-%
-
-\item A \textbf{basis} of a vector space $V$ is a list of vectors in $V$ that is \emph{linearly indepedent} and \emph{spans} $V$.
-\begin{itemize}
-\item $(e_1, \cdots, e_n)$ where $e_i=(0,\cdots, \underbrace{1}_{i},\cdots,0)\in\mathbf{F}^n$ is the \textbf{standard basis} of $\mathbf{F}^n$. 
-\item By \tref{it:T2_6}, a basis of $V$ is the smallest list of l.i. vectors that spans $V$
-\end{itemize}
-\item[P8:] A list $(v_1,\cdots,v_n)$ of vectors in $V$ is a basis of $V$ $\iff$ $\forall v\in V$ can be written uniquely as a linear combination of these vectors $v=\sum a_i v_i$.
-\item[T10/12:] Every \emph{spanning/linearly independent}  list of vectors in a finite-dimensional vector space can be \emph{reduced}/\emph{extended} to a basis of the vector space.
-\item[C11:] Every finite dimensional vector space \emph{has} a basis.
-\item[P13:] $V$ finite dimensional and $U$ subspace of $V$ $\implies$ there is a subspace $W$ of $V$ such that $V=U\oplus W$.
-%
-\item[T14:] Any two bases of a finite-dimensional vector space have the same length
-\item The \textbf{dimension} of a finite-dimensional vector space $\dimension{V}$ is the \emph{length} of any basis of the vector space
-\begin{itemize}
-  \item $\dimension{\mathbf{F}^n} = n$
-  \item $\mathcal{P}(\mathrm{F}_m) = m+1$
-\end{itemize}
-\item[P15:] if $U$  subspace of finite-dimensional $V$ $\implies$ $\dimension{U}\leq\dimension{V}$.
-%
-\item[P16/17] If a list has the right lenght, only need to verify one of the props to be base: either span or l.i.:
-\begin{itemize}
-  \item[P16:\label{it:T2_16}]Every spanning list of vectors in $V$ reduced to a length $\dimension{V}$ is a basis of $V$ 
-  \item[P17:\label{it:T2_17}]Every linearly-independent list of vectors in $V$ extended to a lenght $\dimension{V}$ is a basis of $V$
-\end{itemize}
-%
-\item[T18:\label{it:T2_18}] If $U_1,U_2$ subspaces of a finite-dimensional vector space then 
-\begin{align*}
-\dimension(U_1+U_2)=\dimension(U_1)+\dimension(U_2) - \dimension(U_1\cap U_2)
-\end{align*}
-\item[P19:\label{it:T2_19}] $V$ finite dimensional vector space and $U_1,\cdots,U_m$ subspaces of $V$ such that 
-\begin{itemize}
-  \item $V=\sum U_i$
-  \item $\dimension{V}=\sum\dimension{U_i}$
-\end{itemize}
- then $V=U_1 \oplus \cdots \oplus U_n = \bigoplus U_i$
-\end{itemize}
-
-
-
-%------------------------------------------------------------------------ 
-\subsection*{Exercises}
-%------------------------------------------------------------------------ 
-\exo{}
-\begin{align*}
-a_1(v_1 - v_2) + a_2 (v_2 - v_3) + \cdots + a_{n-1} (v_{n-1} - v_n) + v_n = \\
-a_1 v_1 + (a_1 - a_2) v_2 + \cdots + (1 - a_{n-1}) v_n 
-\end{align*}
-since the latter spans V, then $0 \neq a_1\neq a_2 \cdots$ 
-\qed
-
-%------------------------------------------------------------------------ 
-\exo{} If $(v_1,\cdots,v_n)$ is l.i. in $V$ then $\sum a_i v_i = 0$ and $a_i = 0\; \forall i$, so any l.c. of the new list 
-\begin{align*}
-  c_1 (v_1 - v_2) + c_2 (v_2 - v_3) + \cdots + c_n v_n &= 0\\
-  c_1 v_1 + (c_2 - c_1) v_2 + \cdots (c_n - c_{n-1})v_n &= 0
-\end{align*}
-so $c_1=0$, $c_2 = c_1$, ...  so it is l.i. as well \qed
-%------------------------------------------------------------------------ 
-\exo{} Let $\sum a_i (v_i + w) = \sum a_i v_i + (\sum a_i) w = 0$ and since some $a_j\neq 0$ then $\sum a_i\neq 0$ 
-which leads to $w = \sum \frac{-a_i}{\sum a_i} v_i$ \qed 
-
-%------------------------------------------------------------------------ 
-\exo{} No, since it is not close in addition. E.g. the sum of two of its elements $ (1 + z^m) + (- z^m) = 1  $ 
-results in a polynomial with smaller degree. In contrast note that $\mathcal{P}(\mathrm{F}_m)$ (with degree $\leq m$ ) 
-\emph{is} a subspace. 
-
-%------------------------------------------------------------------------ 
-\exo{}
-\hilight{TODO}
-
-%------------------------------------------------------------------------ 
-\exo{}
-\hilight{TODO}
-
-%------------------------------------------------------------------------ 
-\exo{}
-\hilight{TODO}
-
-%------------------------------------------------------------------------ 
-\exo{} $\forall u\in U$ is given by $u = (3\alpha , \alpha, 7\beta, \beta, \lambda)$ with $\alpha,\beta,\lambda \in \mathbf{R}$, which can be written 
-as $ u = \alpha \underbrace{(3 , 1, 0, 0, 0)}_{u_1} + \beta\underbrace{(0 , 0, 7, 1, 0)}_{u_2} + \lambda \underbrace{(0 , 0, 0, 0, 1)}_{u_3} $ therefore 
- $(u_1,u_2,u_3)$ span $U$. In addition, they are l.i. in $\mathbf{R}^5$ and therefore a base of $U$.
-
-%------------------------------------------------------------------------ 
-\exo{} Yes. The list ($1$, $z$, $z^3+z^2$, $z^3$) is a base of $\mathcal{P}_3(\mathbf{F})$ and none of the polynomials (vectors) have degree 2. Note that $z^2 = \mathbf{p}_2 - \mathbf{p}_3$.
-
-%------------------------------------------------------------------------ 
-\exo{} $V$ with $\mathrm{dim}V = n$ then there is a base $(v_1, \cdots, v_n)$ which by definition $u = \sum a_i v_i$ and $a_i$ are unique. 
-Take each of $v_i$ to span a one dimensional subspace $U_i$, we clearly have that $ V = \bigoplus U_i $
-
-
-%------------------------------------------------------------------------ 
-\exo{}  Let $B_1$ bases of subspace $U\subseteq V $, then the list $B_1$ is also l.i. in $V$ with length $\dimension{U} = \dimension{V}$ 
-therefore, by \pref{it:T2_17}, is also a bases of $V$ which means that both are the same set $U=V$. 
-
-
-%------------------------------------------------------------------------ 
-\exo{} $a_i=0$ is not the only solution $\forall z\in \mathbf{F}$ for $\sum a_i \mathbf{p}_i(z) = 0$ since at $z=2$
-all polynomials have a root, i.e. $\mathbf{p}_i(2)=0$.  Therefore it cannot be linearly indepedent. 
-\hilight{???}
-
-%------------------------------------------------------------------------ 
-\exo{} By \tref{it:T2_18}, 
-\begin{align*}
-  \underbrace{\dimension{R^8}}_8 = \dimension{U+W} = \underbrace{\dimension{U}}_3 + \underbrace{\dimension{W}}_5 - \dimension{U \cap W} \implies \dimension{U \cap W} = 0
-\end{align*}
-which leads to the only subspace dimensionless, i.e. $U \cap W = \{0\}$
-%------------------------------------------------------------------------ 
-\exo{} Following previous reasoning leads to $ \dimension{U \cap W} = 1 \implies U\cap W \neq \{0\}$
-
-%------------------------------------------------------------------------ 
-\exo{} No. Take $u_1,u_2,u_3$ three vectors in $\mathbf{R}^2$ and bases spanning $U_1, U_2, U_3$ resp., then 
-\begin{enumerate}
-  \item $\dimension{(U_1+U_2+U_3)} = \dimension{\mathbf{R}^2} = 2$
-  \item $\dimension{U_i} = 1$
-  \item $U_i\cap U_j = \{0\}$ for $i\neq j$ 
-\end{enumerate} 
-but then $\dimension{(U_1+U_2+U_3)} \neq \dimension{U_1} + \dimension{U_2} + \dimension{U_3} - 0 - ... + 0$.
-
-
-
-%------------------------------------------------------------------------ 
-\exo{}  Using \tref{it:T2_18} we have that $\dimension{  \sum U_i  } = \sum \dimension{U_i} - \sum \underbrace{\dimension{ (U_i \cap \sum_{j>i} U_j) }}_{\ge 0}  $
-$\implies  \dimension{  \sum U_i  } \leq \sum \dimension{U_i}  $
-
-%------------------------------------------------------------------------ 
-
-\exo{} Following from previous result, $U_i \cap \bigoplus\limits_{j>i} U_j = \{0\}$ because the bases of each $U_i$ are l.i. .
-
+\input{axler.02.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
@@ -282,6 +111,271 @@ $\implies  \dimension{  \sum U_i  } \leq \sum \dimension{U_i}  $
 %------------------------------------------------------------------------ 
 \subsection*{Summary}
 
+\begin{description}
+  \item[Linear Map] $T:V\to W$ with the following properties
+  \begin{itemize}
+  \item additivity $T(u+v) = Tu +Tv \in W$ for all $u,v\in V$
+  \item homogeneity $T(av) = aTv \in W$ for all $a\in \mathbf{F}$
+  \end{itemize}
+  %
+  \item[Set of Linear Maps\label{itm:D3_set_linear_maps}] $T\in \mathcal{L}(V,W)$
+  \begin{itemize}
+  \item $0$ map: $0v = 0$ and $0\in \mathcal{L}(V,W)$
+  \item $I$ map: $Iv=v$ and $I\in \mathcal{L}(V,V)$
+  \item differentiation map : $Tp = p'$ and $T\in \mathcal{L}(\mathcal{P}(\mathbf{R}),\mathcal{P}(\mathbf{R}))$
+  \item integration map: $Tp = \int\limits_0^1p(x)dx$ and $T\in \mathcal{L}(\mathcal{P}(\mathbf{R}),\mathbf{R})$
+  \item multiplication by $x^2$ map: $Tp=x^2p(x)$ with $T\in \mathcal{L}(\mathcal{P}(\mathbf{R}),\mathcal{P}(\mathbf{R}))$
+  \item backwards shift map: $T x = T(x_1,x_2, \cdots) = (x_2, x_3, \cdots)$ with $T\in \mathcal{L}(\mathbf{F}^\infty, \mathbf{F}^\infty)$
+  \item map $T:\mathbf{F}^n \to \mathbf{F}^m$: 
+  \begin{align*}
+  T x = T(x_1,\cdots,x_n) =  (T_1x,  \cdots, T_m x) = (\sum a_{1i}x_i,  \cdots, \sum a_{mi}x_i) = y
+  \end{align*} with $a_{ij}\in\mathbf{F}$.
+  
+  \item $(v_1,\cdots,v_n)$ a basis of $V$ and $w_1,\cdots,w_m$ any choice of $W$. We construct a linear map such that $Tv_i=w_j$. Hence $\forall v\in V$
+  \begin{align*}
+  Tv = T(\sum a_i v_i) = \sum a_i w_i
+  \end{align*}
+  \end{itemize}
+  
+  \item[Vector Space] $\mathcal{L}(V,W)$  by \emph{defining} the following operations
+  \begin{itemize}
+  \item $(S+T)v = Sv + Tv \in W$ 
+  \item $(aT)v = a(Tv) \in W$
+  \end{itemize}
+  $\forall S,V \in \mathcal{L}(V,W)$ and $a\in\mathbf{F}$ it satisfies
+  \begin{itemize}
+  \item closed under sum: $S+V \in \mathcal{L}(V,W)$
+  \item closed under scalar multiplication: $aT \in \mathcal{L}(V,W)$
+  \item additive identity is the zero map: $T+0=T$
+  \end{itemize}
+  %
+  \item[Multiplication] (=composition) of linear maps: Let $U \xrightarrow{T} V \xrightarrow{S} W$ then we define
+  \begin{align*}
+  (ST)v = S(Tv)
+  \end{align*}
+  has the properties of
+  \begin{itemize}
+  \item associativity: $(T_1T_2)T_3 = T_1(T_2T_3)$.
+  \item identity: $TI = T = IT$.
+  \item distributive: $(S_1+S_2)T = S_1T+S_2T$ and $S(T_1+T_2) = ST_1 +ST_2$ for $U\xrightarrow{S,S_1,S_1} V \xrightarrow{T,T_1,T_2}$.
+  \item \emph{not} conmutative: in general $ST \neq TS $
+  \end{itemize}
+  %
+  \item[null space\label{itm:D3_nullspace}] of $T$: $\nullspace{T} = \{v\in V \mid Tv=0\}$
+  \item[range] (or image) of $T$: $\rangespace{T} = \{Tv \mid v\in V\}$
+  \item[P1]If $T\in\mathcal{L}(V,W)$ then $\nullspace{T}$ is a subspace of $V$
+  \item[P3]If $T\in\mathcal{L}(V,W)$ then $\rangespace{T}$ is a subspace of $W$
+  \item[P2\label{itm:T3_2}]$T\in\mathcal{L}(V,W)$ \textbf{injective} $\iff \nullspace{T}=\{0\}$
+  \begin{itemize}
+  \item $T:V\to W$ is injective if $\forall u,v \in V$ and $Tu=Tv$ then $u=v$
+  \end{itemize}
+  \item[surjective] $T\in\mathcal{L}(V,W)$ is surjective $\iff  \rangespace{T} = W$ (by definition)
+  \item[T4] If $V$ is finite dimensional and $T\in\mathcal{L}(V,W)$, then
+  \begin{itemize}
+  \item $\rangespace{T}$ is finite dimensional
+  \item the dimension of $V$ can be expressed as
+  \begin{align*}
+  \Aboxed{\dim{V} = \dimension{\nullspace{T}} + \dimension{\rangespace{T}}}
+  \end{align*}
+  \end{itemize}
+  %
+  \item$V,W$ finite dimensional vector spaces
+  \begin{itemize}
+  \item[C5] $\dimension{V} > \dimension{W} \implies \nexists\,T\in\mathcal{L}(V,W)$ injective
+  \item[C6] $\dimension{V} < \dimension{W} \implies \nexists\,T\in\mathcal{L}(V,W)$ surjective
+  \end{itemize}
+  %
+  \item Theory of linear equations. Define $T:\mathbf{F}^n\to\mathbf{F}^m$ by 
+  \begin{align*}
+  Tx = T(x_1,\cdots,x_n) = y = (\sum_k a_{1k}x_k, \cdots \sum_k a_{mk}x_k)
+  \end{align*}
+  then the system of \emph{homogeneous} equations can be written as $Tx=0$ and
+  \begin{itemize}
+  \item Solutions are $x\in\nullspace{T}$.
+  \item $\dimension{\nullspace{T}}>0$ iff $T$ not injective.
+  \item  $T$ not injective if $\dimension{V} > \dimension{W}$ or $n>m$ (i.e. number of unknowns > equations).
+  \end{itemize}
+  The system of \emph{inhomogeneous} equations can be written as $Tx=c$
+  \begin{itemize}
+  \item $\forall c\in\rangespace{T}$ exists a solution in $x$
+  \item but every solution $c\in \mathbf{F}^m$, i.e. is $\rangespace{T}=\mathbf{F}^m$?
+  \item only if $T$ surjective.
+  \item $T$ not surjective if $\dimension{V} < \dimension{W}$ or $n<m$ (i.e. smaller number of unknowns than equations).
+  \item An inhomogenous system of linear equations with more equations than variables has no solution for some choice of the constant terms $c$.
+  \end{itemize}
+  %
+  \item[Matrix Of a Linear Map\label{itm:D6_matrix}]  $T\in\mathcal{L}(V,W)$ is given by \begin{align*}
+  \mathcal{M}(T, (v_1,\cdots, v_n), (w_1, \cdots, w_m)) &=\begin{bmatrix}
+  Tv_1 &| \cdots |& Tv_k & |\cdots |& Tv_n 
+  \end{bmatrix} 
+  \end{align*} by expanding every term of a base of $V$ as linear combinations of a base in $W$. Let us expand both sides of $w = Tv$:
+  \begin{align*}
+  \sum_i b_i w_i &= T\left(\sum_j c_jv_j\right) = \sum_j c_j T v_j = \sum_j c_j \left(\sum_i a_{ij} w_i\right) = \sum_i \left( \sum_j  a_{ij} c_j\right) w_i 
+  \end{align*}
+  Therefore the coefficients of every expansion are related by $b_i = \sum_j  a_{ij} c_j$, which can be expressed as:
+  \begin{align*}
+  \begin{bmatrix}
+  b_1 \\
+  \vdots \\
+  b_i \\
+  \vdots \\
+  b_m
+  \end{bmatrix}
+  &= \begin{bmatrix}
+  a_{11} &       &a_{1j} &        & a_{1n} \\
+         &       &\vdots &        &        \\
+  \vdots &\cdots &a_{ij} & \cdots &\vdots  \\
+         &       &\vdots &        &        \\
+  a_{m1} &       &a_{mj} &        &a_{mn}  \\
+  \end{bmatrix}
+  \begin{bmatrix}
+  c_1 \\
+  \vdots \\
+  c_j \\
+  \vdots \\
+  c_n
+  \end{bmatrix}
+  \end{align*} where
+  \begin{itemize}
+  \item $c_i$ are the coefficients of the linear combination of $v$ on a base $\{v_j\}$ in $V$.
+  \item $b_i$ are the coefficients of the linear combination of $w$ on a base $\{w_i\}$ in $W$.
+  \item $a_{ij}$ coefficients of the linear combination of every vector in the base $v_j$ on the base $\{w_i\}$ in $W$.
+  \end{itemize}
+  Properties:
+  \begin{itemize}
+  \item $\mathcal{M}(T+S) = \mathcal{M}(T) + \mathcal{M}(S)$
+  \item $\mathcal{M}(cT) = c\mathcal{M}(T)$
+  \item $\mathcal{M}(PT) = \mathcal{M}(P)\mathcal{M}(T)$
+  \end{itemize}
+  whenever $c\in\mathbf{F}$, $T,S\in\mathcal{L}(U,V)$ and  $P\in\mathcal{M}(V,W)$
+  %
+  \item $\mathrm{Mat}(m,n,\mathbf{F})$ is the set of all $m\times n$ matrices with entries in $\mathbf{F}$. It is a vector space over $\mathbf{F}$
+  \item \emph{Matrix of a vector} $v\in V$ is a $n\times 1$ matrix.
+  \item[P14] $T\in\mathcal{L}(V,W)$ and $(v_1,\cdots,v_n)$ a base of $V$ and $(w_1,\cdots,w_m)$ a base of $W$. Then
+  \begin{align*}
+  \mathcal{M}(Tv) =\mathcal{M}(T)\mathcal{M}(v) 
+  \end{align*}
+  %
+  \item[Invertibility\label{itm:D3_invertible_operator}] $T\in\mathcal{L}(V,W)$ \textbf{invertible} if $\exists S\in\mathcal{L}(W,V)$ and $ST=I_V$ (identity map on $V$) and $TS=I_U$ (identity map on $W$) 
+  \begin{align*}
+  I \circlearrowright V \xrightarrow{T}\xleftarrow{S} W \circlearrowleft I
+  \end{align*}
+  \item If $T$ invertible then it has a unique inverse denoted $T^{-1}$ 
+  \item[P17] A linear map is invertible $\iff$ it is injective and surjective.
+  
+  \item[Isomorphic] Two vectors spaces are called isomorphic if there is an invertible linear map from one vector space onto the other one. As abstract vectors spaces, two isomorphic spaces have the same properties.
+  
+  \item[T18] Two finite dimensional vector spaces are isomorphic $\iff$ they have the same dimension
+  
+  \item[P19]
+  
+  \item[P20\label{itm:P3_20}] If $V$ and $W$ are finite dimensional vector spaces, then
+  \begin{itemize}
+  \item $\mathcal{L}(V,W)$ is a finite dimensional vector space
+  \item $\dim{\mathcal{L}(V,W)} = \dim{V} \times \dim{W}$
+  \end{itemize}
+  
+  \item[T21\label{itm:T3_21}] $V$ finite dimensional and $T\in\mathcal{L}(V)$ then
+  \begin{align*}
+  T \text{ invertible} \iff T \text{ injective} \iff T \text{ surjective} 
+  \end{align*}
+  
+  
+  \end{description}
+  
+  \hilight{TODO}
+  
+  %------------------------------------------------------------------------ 
+  \subsection*{Exercises}
+  \setcounter{paragraph}{0}
+  
+  \exo{} If $T \in \mathcal{L}(V,V)$ then by T3.4
+  \begin{align*}
+  \dim{V} = \underbrace{\dim{\nullspace{T}}}_{\leq 1} + \underbrace{\dim{\rangespace{T}}}_{\leq 1} = 1
+  \end{align*}
+  since $\nullspace{T}$ and $\rangespace{T}$ are subspaces of $V$ (source and destination domains are $V$) its dimensions are at most 1 (3.3 and 2.15). Two cases are possible
+  \begin{itemize}
+  \item $\dim{\rangespace{T}}=0$ and $\dim{\nullspace{T}}=1$ implies that $\rangespace{T}=\{0\}$ (subspace of dimension zero) and $\nullspace{T}=V$ (subspace with same dimension of containing vector space 2.12).
+  \item $\dim{\rangespace{T}}=1$ and $\dim{\nullspace{T}}=0$ means that $\rangespace{T}=V$ and $\nullspace{T}=\{0\}$ 
+  \end{itemize}
+  
+  $\rangespace{T}=V$ then $Tv = w$ can be expanded in a bases of $V$. Since $\dim{V}=1$ any vector $v\in V$ can be a base. Therefore $Tv = a v$ where $a\in \mathbf{F}$. Notice that if $a=0$, the first case is also included.
+  
+  %------------------------------------------------------------------------ 
+  \exo{}
+  \hilight{??}
+  
+  %------------------------------------------------------------------------ 
+  \exo{} Let $S\in\mathcal{U,W}$ and $T\in\mathcal{V,W}$. Bv P2.13 we can extend subspace $U$ with another subspace $R$ of $V$ such that $V=U\oplus R$. This means that $\forall v\in V$ $!\exists u\in U$ and $r\in W$ such that $v=u+r$ and $Tv=T(u+r)=Tu+Tr$. Taking $Tv = Su +Tr$ we can conclude that if $u=v$ hence $Tu=Su$. 
+  %------------------------------------------------------------------------ 
+  \exo{} By T2.13 we can extend $\nullspace{T}$ subspace of $V$ (P3.1) to $V$ as $V = \nullspace{T} \oplus W$. Hence
+  \begin{align*}
+  \dimension{V} \stackrel{\text{T2.18}+\text{P1.6}}{=} \dimension{\nullspace{T}} + \dimension{W} \stackrel{\text{T3.4}}{=} \dimension{\nullspace{T}} + \dimension{\rangespace{T}}
+  \end{align*} 
+  but the $\rangespace{T}\subseteq \mathbf{F}$ (P3.3) since $T\in\mathcal{L}(V,\mathbf{F})$. Finally $\dimension{\rangespace{T}}\leq\dimension{F}=1$ (P2.15) which means, considering the equation above, that $\dimension{W}\leq 1$ and hence can be spanned by a single-vector base $W=\{au \mid a\in\mathrm{F}\}$\qed
+  
+  %------------------------------------------------------------------------ 
+  \exo{} $(v_1,\cdots,v_n)$ l.i. in $V$ implies $0=\sum a_iv_i$ and $a_i=0\,\forall i$. $T$ injective $\stackrel{P3.2}{\iff} \nullspace{T}=\{0\}$ then $Tv_i\neq 0$ and $Tv_i\neq Tv_j$. Hence 
+  \begin{align*}
+  T0 = 0 = a_1 Tv_1 + \cdots + a_n Tv_n
+  \end{align*}
+  where all $a_i=0$, which means that $(Tv_1,\cdots,Tv_n)$ are l.i. \qed
+  %------------------------------------------------------------------------ 
+  \exo{} Let us assume that $S_1S_2\cdots S_nx = S_1S_2\cdots S_ny$. 
+  Expanding both sides as $S_1S_2\cdots S_nx = S_1(S_2( \cdots S_n(x) ))$ lead to $S_1 x_1 = S_1 x_2$ but since $S_1$ is injective this implies tjat $x_1 = y_1$ or analogously $S_2( \cdots S_n(x)) = S_2( \cdots S_n(y))$. Repeating the same reasoning, $x=y$, which demonstrate that the product $S_1S_2\cdots S_n$ is injective.
+  
+  %------------------------------------------------------------------------ 
+  \exo{} If $(v_1,\cdots,v_n)$ spans $V$ then $\forall v\in V$ $v=\sum a_i v_i$ with $a_i\in\mathbf{F}$. $T\in\mathcal{L}(V,W$ is surjective, and so it reaches any vector in $W$. Using the expression above, $\forall w\in W$ can be written as as linear superpositionc
+  \begin{align*}
+  w = Tv = \sum a_i Tv_i
+  \end{align*}
+  or in other words, the list $(Tv_1,\cdots, Tv_n)$ spans $W$.
+  %------------------------------------------------------------------------ 
+  \exo{}
+  \hilight{??}
+  %------------------------------------------------------------------------ 
+  \exo{} Let  $T\in\mathcal{L}(\mathbf{F}^4, \mathbf{F}^2)$. $\nullspace{T}$ can be span with two linearly independent vectors as
+  \begin{align*}
+  x = a_1 (5,1,0,0) + a_2 (0,0,7,1)
+  \end{align*}
+  , therefore $\dimension{\nullspace T} = 2$. Using the identity from T4: $\dimension{\mathbf{F}^4} = 4 = 2 + \dimension{\rangespace{T}} \implies \dimension{\rangespace{T}} = \dimension{\mathbf{F}^2} = 2$ therefore $T$ is surjective. 
+  %------------------------------------------------------------------------ 
+  \exo{} This nullspace 
+  \begin{align*}
+  x =\beta (3,1,0,0,0) + \gamma (0, 0, 1,1,1)
+  \end{align*}
+  has dimension two which means (using T4) that $\dimension{\rangespace{T}} = 3$ but it cannot be since $\dimension{\mathbf{F}^2}=2$ and $\rangespace{T}\subseteq \mathbf{F}^2$.
+  %------------------------------------------------------------------------ 
+  \exo{} $\dimension{T} = \dimension{\nullspace{T}} + \dimension{\rangespace{T}} < \infty$
+  %------------------------------------------------------------------------ 
+  \exo{}
+  \hilight{TODO - a limpio}
+  %------------------------------------------------------------------------ 
+  \exo{} $T\in\mathcal{L}(V,W)$ surjective $\iff$ $\dimension{V}\geq \dimension{W}$ (big $V$ to small $W$)
+  \begin{itemize}
+  \item[$\Rightarrow$] If $T$ surjective means $\rangespace{T}=W$ then by T3.4 $\dimension{V} = \underbrace{\dimension{\nullspace{T}}}_{\geq 0} + \dimension{W}$ therefore $\dimension{V}\geq \dimension{W}$. Another way to demonstrate that is proving the negation in the other direction. If $\dimension{W} \not{\leq} \dimension{V}$, i.e.  $\dimension{W} > \dimension{V}$, implies (by C3.6) that $T$ cannot be surjective
+  
+  \item[$\Leftarrow$]  \hilight{??}
+  \end{itemize}\qed
+  %------------------------------------------------------------------------ 
+  \exo{} $T\in\mathcal{L}(V,W)$ and $\nullspace{T}=U \iff \dimension{U} \geq \dimension{V} - \dimension{W}$
+  \begin{itemize}
+  \item[$\Rightarrow$] $\dimension{V}=\dimension{\nullspace{T}} + \dimension{\rangespace{T}}\leq \dimension{\nullspace{T}} + \dimension{W}$ provided that $\rangespace{T}\subseteq W$. Hence $\dimension{U} \geq \dimension{V} - \dimension{W}$. 
+  \item[$\Leftarrow$] \hilight{??}
+  \end{itemize}
+  
+  %------------------------------------------------------------------------ 
+  \exo{}
+  
+  \hilight{TODO}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \newpage
+  \section{Polynomials}
+  \subsection*{Summary}
+  \hilight{TODO}
+  \subsection*{Exercises}
+  \setcounter{paragraph}{0}
+  \hilight{TODO}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \selectlanguage{english}
