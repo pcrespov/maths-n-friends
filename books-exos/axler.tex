@@ -62,6 +62,8 @@ colorlinks=true,bookmarks=true,bookmarksnumbered=true]{hyperref}
 \newcommand{\inner}[1]{\langle {#1}\rangle}
 \newcommand{\norm}[1]{\|#1\|}
 \newcommand{\jota}{\mathrm{j}}
+\newcommand{\eqdef}{\mathrel{\mathop:}=}
+\newcommand{\eqdefi}{=\mathrel{\mathop:}}
 
 % From DLL
 \input{margins}
@@ -120,7 +122,7 @@ colorlinks=true,bookmarks=true,bookmarksnumbered=true]{hyperref}
   %
   \item[Set of Linear Maps\label{itm:D3_set_linear_maps}] $T\in \mathcal{L}(V,W)$
   \begin{itemize}
-  \item $0$ map: $0v = 0$ and $0\in \mathcal{L}(V,W)$
+  \item $0$ map: $0v = 0$ and the first $0\in \mathcal{L}(V,W)$
   \item $I$ map: $Iv=v$ and $I\in \mathcal{L}(V,V)$
   \item differentiation map : $Tp = p'$ and $T\in \mathcal{L}(\mathcal{P}(\mathbf{R}),\mathcal{P}(\mathbf{R}))$
   \item integration map: $Tp = \int\limits_0^1p(x)dx$ and $T\in \mathcal{L}(\mathcal{P}(\mathbf{R}),\mathbf{R})$
@@ -131,10 +133,16 @@ colorlinks=true,bookmarks=true,bookmarksnumbered=true]{hyperref}
   T x = T(x_1,\cdots,x_n) =  (T_1x,  \cdots, T_m x) = (\sum a_{1i}x_i,  \cdots, \sum a_{mi}x_i) = y
   \end{align*} with $a_{ij}\in\mathbf{F}$.
   
-  \item $(v_1,\cdots,v_n)$ a basis of $V$ and $w_1,\cdots,w_m$ any choice of $W$. We construct a linear map such that $Tv_i=w_j$. Hence $\forall v\in V$
+  \item A linear map can be constructed as follows: Take a basis $(v_1,\cdots,v_n)$ of $V$ and any choice $w_1,\cdots,w_n$  of $W$ and then define $T$ as
   \begin{align*}
-  Tv = T(\sum a_i v_i) = \sum a_i w_i
+  Tv = T(\sum a_i v_i) \eqdef \sum a_i w_i = w
   \end{align*}
+  for arbitrary $a_i\in\mathbf{F}$. Then the equation above:
+  \begin{itemize}
+    \item is a function from $v\in V$ to $w\in W$
+    \item is linear map since $T(\alpha v+ \beta v') = T(\alpha \sum a_i v_i + \beta \sum  b_i v_i) = T(\sum (\alpha a_i +  \beta b_i) v_i) \eqdef \sum (\alpha a_i +  \beta b_i) w_i = \alpha \sum a_i w_i + \beta \sum b_i w_i \eqdefi \alpha Tv + \beta Tv' $  
+    \item and the transformation on the basis vectors is $Tv_i=w_i$, by simply taking $a_j=0$ for $\forall j\ne j$ except for $a_i=1$.
+  \end{itemize}
   \end{itemize}
   
   \item[Vector Space] $\mathcal{L}(V,W)$  by \emph{defining} the following operations
@@ -157,14 +165,14 @@ colorlinks=true,bookmarks=true,bookmarksnumbered=true]{hyperref}
   \begin{itemize}
   \item associativity: $(T_1T_2)T_3 = T_1(T_2T_3)$.
   \item identity: $TI = T = IT$.
-  \item distributive: $(S_1+S_2)T = S_1T+S_2T$ and $S(T_1+T_2) = ST_1 +ST_2$ for $U\xrightarrow{S,S_1,S_1} V \xrightarrow{T,T_1,T_2}$.
+  \item distributive: $(S_1+S_2)T = S_1T+S_2T$ and $S(T_1+T_2) = ST_1 +ST_2$ for $U\xrightarrow{S,S_1,S_1} V \xrightarrow{T,T_1,T_2} W$.
   \item \emph{not} conmutative: in general $ST \neq TS $
   \end{itemize}
   %
   \item[null space\label{itm:D3_nullspace}] of $T$: $\nullspace{T} = \{v\in V \mid Tv=0\}$
   \item[range] (or image) of $T$: $\rangespace{T} = \{Tv \mid v\in V\}$
-  \item[P1]If $T\in\mathcal{L}(V,W)$ then $\nullspace{T}$ is a subspace of $V$
-  \item[P3]If $T\in\mathcal{L}(V,W)$ then $\rangespace{T}$ is a subspace of $W$
+  \item[P1]If $T\in\mathcal{L}(V,W)$ then $\nullspace{T}$ is a \emph{subspace} of $V$
+  \item[P3]If $T\in\mathcal{L}(V,W)$ then $\rangespace{T}$ is a \emph{subspace} of $W$
   \item[P2\label{itm:T3_2}]$T\in\mathcal{L}(V,W)$ \textbf{injective} $\iff \nullspace{T}=\{0\}$
   \begin{itemize}
   \item $T:V\to W$ is injective if $\forall u,v \in V$ and $Tu=Tv$ then $u=v$
@@ -172,28 +180,30 @@ colorlinks=true,bookmarks=true,bookmarksnumbered=true]{hyperref}
   \item[surjective] $T\in\mathcal{L}(V,W)$ is surjective $\iff  \rangespace{T} = W$ (by definition)
   \item[T4] If $V$ is finite dimensional and $T\in\mathcal{L}(V,W)$, then
   \begin{itemize}
-  \item $\rangespace{T}$ is finite dimensional
+  \item $\rangespace{T}$ is finite dimensional in $W$
   \item the dimension of $V$ can be expressed as
   \begin{align*}
   \Aboxed{\dim{V} = \dimension{\nullspace{T}} + \dimension{\rangespace{T}}}
   \end{align*}
   \end{itemize}
   %
-  \item$V,W$ finite dimensional vector spaces
+  \item $V,W$ finite dimensional and $T\in\mathcal{L}(V,W)$ (dimension as "size")
   \begin{itemize}
-  \item[C5] $\dimension{V} > \dimension{W} \implies \nexists\,T\in\mathcal{L}(V,W)$ injective
-  \item[C6] $\dimension{V} < \dimension{W} \implies \nexists\,T\in\mathcal{L}(V,W)$ surjective
+  \item[C5] $\dimension{V} > \dimension{W} \implies \nexists\,T$ injective
+  \item[C6] $\dimension{V} < \dimension{W} \implies \nexists\,T$ surjective
   \end{itemize}
   %
-  \item Theory of linear equations. Define $T:\mathbf{F}^n\to\mathbf{F}^m$ by 
+  \item [Theory of linear equations] C5 and C6 have consequences. Let $T:\mathbf{F}^n\to\mathbf{F}^m$ be defined as 
   \begin{align*}
-  Tx = T(x_1,\cdots,x_n) = y = (\sum_k a_{1k}x_k, \cdots \sum_k a_{mk}x_k)
+  Tx &= y \\
+  T(\sum^n x_i e_i) &= \sum^m y_j e'_j \\
+  T(x_1,\cdots,x_n) &= (y_1,\cdots,y_m) \eqdef (\sum^n a_{1k}x_k, \cdots,\sum^n a_{mk}x_k)
   \end{align*}
   then the system of \emph{homogeneous} equations can be written as $Tx=0$ and
   \begin{itemize}
   \item Solutions are $x\in\nullspace{T}$.
   \item $\dimension{\nullspace{T}}>0$ iff $T$ not injective.
-  \item  $T$ not injective if $\dimension{V} > \dimension{W}$ or $n>m$ (i.e. number of unknowns > equations).
+  \item  $T$ not injective if $\dimension{V} > \dimension{W}$ or $n>m$ (i.e. more unknown than equations).
   \end{itemize}
   The system of \emph{inhomogeneous} equations can be written as $Tx=c$
   \begin{itemize}
@@ -289,7 +299,20 @@ colorlinks=true,bookmarks=true,bookmarksnumbered=true]{hyperref}
   \subsection*{Exercises}
   \setcounter{paragraph}{0}
   
-  \exo{} If $T \in \mathcal{L}(V,V)$ then by T3.4
+  \exo{} With $\dim{V}=1$ and $T\in\mathcal{L}(V,V)$ then let $\{v\}$ be a base of $V$ s.t. $\forall u\in V \implies u=av$. 
+  Therefore the linear map on $u$ is by definition
+  \begin{align*}
+    Tu = T(av) = a Tv = abv = cv
+  \end{align*}
+  since $Tv \in V$ and can be expanded with the base $v$ as well. So under these conditions, 
+  \begin{align*}
+    Tu = c v
+  \end{align*}
+for $c\in\mathbf{F}$ and $u,v\in V$.
+  
+  ---
+
+  If $T \in \mathcal{L}(V,V)$ then by T3.4
   \begin{align*}
   \dim{V} = \underbrace{\dim{\nullspace{T}}}_{\leq 1} + \underbrace{\dim{\rangespace{T}}}_{\leq 1} = 1
   \end{align*}
@@ -303,65 +326,98 @@ colorlinks=true,bookmarks=true,bookmarksnumbered=true]{hyperref}
   
   %------------------------------------------------------------------------ 
   \exo{}
-  \hilight{??}
+  \begin{align*}
+    f(v) = \sqrt{v_1 v_2}
+  \end{align*} 
+  where $v=v_1e_1+v_2e_2 \equiv (v_1,v_2) \in \mathbf{R}^2$. Then if $f(av) = \sqrt{av_1 av_2} = a\sqrt{v_1v_2} = af(v)$
+  
+  \hilight{a negative!}
   
   %------------------------------------------------------------------------ 
-  \exo{} Let $S\in\mathcal{U,W}$ and $T\in\mathcal{V,W}$. Bv P2.13 we can extend subspace $U$ with another subspace $R$ of $V$ such that $V=U\oplus R$. This means that $\forall v\in V$ $!\exists u\in U$ and $r\in W$ such that $v=u+r$ and $Tv=T(u+r)=Tu+Tr$. Taking $Tv = Su +Tr$ we can conclude that if $u=v$ hence $Tu=Su$. 
-  %------------------------------------------------------------------------ 
-  \exo{} By T2.13 we can extend $\nullspace{T}$ subspace of $V$ (P3.1) to $V$ as $V = \nullspace{T} \oplus W$. Hence
+  \exo{} By \pref{itm:P2_13} P2.13 we can extend subspace $U$ with another subspace $U'\subset V$ such that $U\oplus U' = V \implies v = u+u'$ 
+  is a unique decomposition and if we define 
+\begin{align*}
+  Tv = Tu+Tu' = Su + S'u'
+\end{align*}  
+with $S\in\mathcal{L}(U,W)$, $S'\in\mathcal{L}(U',W)$ and $T\in\mathcal{L}(U\oplus U',W)$. 
+And if $v=u \implies Tv = Su$.
+
+%------------------------------------------------------------------------ 
+  \exo{} By \pref{itm:P2_13} we can extend $\nullspace{T}$ subspace of $V$ (\pref{itm:P3_1}) to $V$ as $V = \nullspace{T} \oplus W$. Hence
   \begin{align*}
   \dimension{V} \stackrel{\text{T2.18}+\text{P1.6}}{=} \dimension{\nullspace{T}} + \dimension{W} \stackrel{\text{T3.4}}{=} \dimension{\nullspace{T}} + \dimension{\rangespace{T}}
   \end{align*} 
-  but the $\rangespace{T}\subseteq \mathbf{F}$ (P3.3) since $T\in\mathcal{L}(V,\mathbf{F})$. Finally $\dimension{\rangespace{T}}\leq\dimension{F}=1$ (P2.15) which means, considering the equation above, that $\dimension{W}\leq 1$ and hence can be spanned by a single-vector base $W=\{au \mid a\in\mathrm{F}\}$\qed
+  but the $\rangespace{T}\subseteq \mathbf{F}$ (P3.3) since $T\in\mathcal{L}(V,\mathbf{F})$. Finally $\dimension{\rangespace{T}}\leq\dimension{F}=1$ (P2.15) which means, considering the equation above, that $\dimension{W}\leq 1$ and hence can be spanned by a single-vector base $W=\{au \mid a\in\mathrm{F}\}$
   
   %------------------------------------------------------------------------ 
   \exo{} $(v_1,\cdots,v_n)$ l.i. in $V$ implies $0=\sum a_iv_i$ and $a_i=0\,\forall i$. $T$ injective $\stackrel{P3.2}{\iff} \nullspace{T}=\{0\}$ then $Tv_i\neq 0$ and $Tv_i\neq Tv_j$. Hence 
   \begin{align*}
   T0 = 0 = a_1 Tv_1 + \cdots + a_n Tv_n
   \end{align*}
-  where all $a_i=0$, which means that $(Tv_1,\cdots,Tv_n)$ are l.i. \qed
+  where all $a_i=0$, which means that $(Tv_1,\cdots,Tv_n)$ are l.i. 
   %------------------------------------------------------------------------ 
-  \exo{} Let us assume that $S_1S_2\cdots S_nx = S_1S_2\cdots S_ny$. 
-  Expanding both sides as $S_1S_2\cdots S_nx = S_1(S_2( \cdots S_n(x) ))$ lead to $S_1 x_1 = S_1 x_2$ but since $S_1$ is injective this implies tjat $x_1 = y_1$ or analogously $S_2( \cdots S_n(x)) = S_2( \cdots S_n(y))$. Repeating the same reasoning, $x=y$, which demonstrate that the product $S_1S_2\cdots S_n$ is injective.
+  \exo{} Let us assume that $S_1S_2\cdots S_n(x) = S_1S_2\cdots S_n(y)$. 
+  Rewriting $S_1(S_2( \cdots S_n(\alpha) )) = S_1 \alpha_1$ we can shorten it as $S_1 x_1 = S_1 y_1$. 
+  Since $S_1$ is injective this implies that $x_1 = y_1$ or equivalently $S_2( S_3 \cdots S_n(x)) = S_2( S_3 \cdots S_n(y))$. 
+  Repeating the same reasoning $n$ times, we reach that $x=y$ and therefore can conclude that the product 
+  $S_1S_2\cdots S_n$ is injective. 
   
   %------------------------------------------------------------------------ 
-  \exo{} If $(v_1,\cdots,v_n)$ spans $V$ then $\forall v\in V$ $v=\sum a_i v_i$ with $a_i\in\mathbf{F}$. $T\in\mathcal{L}(V,W$ is surjective, and so it reaches any vector in $W$. Using the expression above, $\forall w\in W$ can be written as as linear superpositionc
+  \exo{} $(v_1,\cdots,v_n)$ spans $V$ and $T\in\mathcal{L}(V,W)$ is surjective, and 
+  so the map $Tv$ reaches any vector in $W$. Then $\forall w\in W$ 
   \begin{align*}
-  w = Tv = \sum a_i Tv_i
+    w = Tv = \sum^n a_i Tv_i
   \end{align*}
-  or in other words, the list $(Tv_1,\cdots, Tv_n)$ spans $W$.
+  or in other words, the list $(Tv_1,\cdots, Tv_n)$ spans $W$. Definitively some of the $Tvi=0$ which 
+  suggests that $\dim{V}\geq \dim{W}$ as can also be deduced from C3.6. 
+  
+  
   %------------------------------------------------------------------------ 
-  \exo{}
-  \hilight{??}
+  \exo{} By P3.1 $\nullspace{T}$ is a subspace of $V$ and since $U \cap \nullspace{T} = \{0\}$ by P1.6 
+  we can decompose $V$ as $V = \nullspace{T} \oplus U$, then $\forall v\in V$ can be uniquely expressed as 
+  $v=n+u$ which maps as $Tv=0+Tu \in W$, that is, $U \xrightarrow{T} \rangespace{T} \subseteq W$.
+
   %------------------------------------------------------------------------ 
-  \exo{} Let  $T\in\mathcal{L}(\mathbf{F}^4, \mathbf{F}^2)$. $\nullspace{T}$ can be span with two linearly independent vectors as
+  \exo{} Let  $T\in\mathcal{L}(\mathbf{F}^4, \mathbf{F}^2)$. $\nullspace{T}$ can be span with two linearly independent
+  vectors (i.e. a base) as
   \begin{align*}
-  x = a_1 (5,1,0,0) + a_2 (0,0,7,1)
+    x &= 5\alpha e_1 + \alpha e_2 + 7\beta e_3+ \beta e_4 \\
+    x &= \alpha (5e_1 + e_2) + \beta (7e_3 + e_4) \\
+    x &= \alpha (5,1,0,0) + \beta (0,0,7,1)
   \end{align*}
-  , therefore $\dimension{\nullspace T} = 2$. Using the identity from T4: $\dimension{\mathbf{F}^4} = 4 = 2 + \dimension{\rangespace{T}} \implies \dimension{\rangespace{T}} = \dimension{\mathbf{F}^2} = 2$ therefore $T$ is surjective. 
+  , therefore $\dimension{\nullspace T} = 2$. 
+  Using the identity from T4: $\dimension{\mathbf{F}^4} = 4 = 2 + \dimension{\rangespace{T}} \implies \dimension{\rangespace{T}} = \dimension{\mathbf{F}^2} = 2$ 
+  therefore $T$ is surjective. 
   %------------------------------------------------------------------------ 
-  \exo{} This nullspace 
+  \exo{} This subspace can be span with two l.i. vectors $(v_1, v_2)$
   \begin{align*}
-  x =\beta (3,1,0,0,0) + \gamma (0, 0, 1,1,1)
+    x &= 3\alpha e_1 + \alpha e_2 + \beta e_3+ \beta e_4 + \beta e_5\\
+    x &= \alpha \underbrace{(3e_1 + e_2)}_{v_1} + \beta \underbrace{(e_3 + e_4 + e_5)}_{v_2} \\
+    x &= \alpha (3,1,0,0,0) + \beta (0, 0, 1,1,1)
   \end{align*}
-  has dimension two which means (using T4) that $\dimension{\rangespace{T}} = 3$ but it cannot be since $\dimension{\mathbf{F}^2}=2$ and $\rangespace{T}\subseteq \mathbf{F}^2$.
+  so it has dimension two. Now if this would be a nullspace, using T4, would mean that $\dimension{\rangespace{T}} = 3$
+  but  $\rangespace{T} \subseteq \mathbf{F}^2$ which is a contradiction.
+
   %------------------------------------------------------------------------ 
   \exo{} $\dimension{T} = \dimension{\nullspace{T}} + \dimension{\rangespace{T}} < \infty$
   %------------------------------------------------------------------------ 
-  \exo{}
-  \hilight{TODO - a limpio}
-  %------------------------------------------------------------------------ 
-  \exo{} $T\in\mathcal{L}(V,W)$ surjective $\iff$ $\dimension{V}\geq \dimension{W}$ (big $V$ to small $W$)
+  \exo{} $\exists T \in\mathcal{L}(V,W)$ surjective $ \iff \dimension{W}\leq \dimension{V}$
   \begin{itemize}
-  \item[$\Rightarrow$] If $T$ surjective means $\rangespace{T}=W$ then by T3.4 $\dimension{V} = \underbrace{\dimension{\nullspace{T}}}_{\geq 0} + \dimension{W}$ therefore $\dimension{V}\geq \dimension{W}$. Another way to demonstrate that is proving the negation in the other direction. If $\dimension{W} \not{\leq} \dimension{V}$, i.e.  $\dimension{W} > \dimension{V}$, implies (by C3.6) that $T$ cannot be surjective
+    \item[$\Rightarrow$] If $\exists T$ surjective then by definition $\rangespace{T} = W$ and using T3.4 
+    $\dimension{V} = \dimension{\nullspace{T}} + \dimension{W} \implies \dimension{V}\geq \dimension{W}$
+    \item[$\Leftarrow$] if $n=\dimension{V}\geq \dimension{W}=m$ we can construct a linear map using the method above and
+    choosing basis in both vector spaces. This is, let's define a linear map as $Tv = \sum^n a_i w_i$ with a base 
+    $(v_1, \cdots, v_n)$ of $V$ and choosing a base plus some l.d. vectors $(w_1, \cdots, w_m, w_{m+1}, \cdots, w_n)$ . 
+    Since the latter list spans $W$, $Tv$ will do as well, meaning that $\rangespace{T} = W$.
+    \hilight{??}
+  \end{itemize}
   
-  \item[$\Leftarrow$]  \hilight{??}
-  \end{itemize}\qed
   %------------------------------------------------------------------------ 
-  \exo{} $T\in\mathcal{L}(V,W)$ and $\nullspace{T}=U \iff \dimension{U} \geq \dimension{V} - \dimension{W}$
+  \exo{} $T\in\mathcal{L}(V,W)$ and $\nullspace{T}=U \subset V \iff \dimension{V} - \dimension{W} \leq \dimension{U}$
   \begin{itemize}
   \item[$\Rightarrow$] $\dimension{V}=\dimension{\nullspace{T}} + \dimension{\rangespace{T}}\leq \dimension{\nullspace{T}} + \dimension{W}$ provided that $\rangespace{T}\subseteq W$. Hence $\dimension{U} \geq \dimension{V} - \dimension{W}$. 
-  \item[$\Leftarrow$] \hilight{??}
+  \item[$\Leftarrow$] If $\dimension{V} - \dimension{W} \geq 0 \iff \dimension{V} \geq \dimension{W}$ implies (by 3.12) that $\exists T$ surjective
+  i.e. $\rangespace{T} = W$ and therefore $\dimension{V} - \dimension{W} = \dimension{\nullspace{T}}$ that suggests that $U=\nullspace{T}$.
   \end{itemize}
   
   %------------------------------------------------------------------------ 
