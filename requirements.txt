@@ -128,8 +128,10 @@ nbformat==5.1.3
     #   nbconvert
     #   notebook
 nest-asyncio==1.5.1
-    # via nbclient
-notebook==6.4.1
+    # via
+    #   nbclient
+    #   notebook
+notebook==6.4.10
     # via
     #   jupyter
     #   jupyter-contrib-core
@@ -201,7 +203,7 @@ qtpy==1.9.0
     # via qtconsole
 scipy==1.7.0
     # via -r requirements.in
-send2trash==1.7.1
+send2trash==1.8.0
     # via notebook
 six==1.16.0
     # via
