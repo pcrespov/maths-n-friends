@@ -61,7 +61,7 @@ def discrete_green_function(xc, yc, zc, a, b):
         - _primitive_of_g(u=u1, v=v2, h=zc)
         - _primitive_of_g(u=u2, v=v1, h=zc)
     )
-    assert result == _definite_integral(_primitive_of_g, u1, u2, v1, v2, zc)
+    assert result == _definite_integral(_primitive_of_g, u1, u2, v1, v2, zc)  # nosec
     S = a * b
     return result / S
 
@@ -101,3 +101,28 @@ def average_discrete_green_function(xc, yc, zc, a, b):
 
     S = a * b
     return (Yuu + Yud + Ydu + Ydd) / S**2
+
+
+import pytest
+
+
+@pytest.param(
+    "gal,pm,gf,loc",
+    [
+        (2.9732, 3.5255, np.Inf, (0, 0, 0)),
+        (1.1121, 1.0380, 1.0, (1, 0, 0)),
+        (0.7490, 0.7247, 0.7071, (1, 1, 0)),
+        (0.2513, 0.2506, 0.2500, (4, 0, 0)),
+        (2.4674, 2.9533, 10.0, (0, 0, 0.1)),
+        (0.8788, 0.9286, 1.0, (0, 0, 1)),
+        (0.1987, 0.1933, 0.2, (0, 0, 5)),
+    ],
+)
+def test_integration_values_table(gal, pm, gf, loc):
+    assert discrete_green_function(*loc, a=1, b=1) == pytest.approx(pm, abs=0.0001)
+    assert average_discrete_green_function(*loc, a=1, b=1) == pytest.approx(
+        gal, abs=0.0001
+    )
+    assert 1 / np.sqrt(loc[0] ** 2 + loc[1] ** 2 + loc[3] ** 2) == pytest.approx(
+        gf, abs=0.001
+    )
