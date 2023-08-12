@@ -9,30 +9,46 @@ from scipy.constants import epsilon_0
 #
 
 
-def _primitive_of_g(u, v, h):
+def _primitive_of_g(u, v, w):
     return (
-        u * np.arcsinh(v / np.sqrt(u**2 + h**2))
-        + v * np.arcsinh(u / np.sqrt(v**2 + h**2))
-        - h * np.arctanh(u * v / (h * np.sqrt(u**2 + v**2 + h**2)))
+        u * np.arcsinh(v / np.sqrt(u**2 + w**2))
+        + v * np.arcsinh(u / np.sqrt(v**2 + w**2))
+        - w * np.arctanh(u * v / (w * np.sqrt(u**2 + v**2 + w**2)))
     )
 
 
-def _primitive_of_ug(u, v, h):
-    return 0.5 * (
-        v * np.sqrt(u**2 + v**2 + h**2)
-        + (u**2 + h**2) * np.arcsinh(v / np.sqrt(u**2 + h**2))
-    )
+def _primitive_of_ug(u, v, w):
+    return (
+        v * np.sqrt(u**2 + v**2 + w**2)
+        + (u**2 + w**2) * np.arcsinh(v / np.sqrt(u**2 + w**2))
+    ) / 2
 
 
-def _primitive_of_vg(u, v, h):
-    return 0.5 * (
-        u * np.sqrt(u**2 + v**2 + h**2)
-        + (v**2 + h**2) * np.arcsinh(u / np.sqrt(v**2 + h**2))
-    )
+def _primitive_of_vg(u, v, w):
+    return (
+        u * np.sqrt(u**2 + v**2 + w**2)
+        + (v**2 + w**2) * np.arcsinh(u / np.sqrt(v**2 + w**2))
+    ) / 2
 
 
-def _primitive_of_uvg(u, v, h):
-    return ((u**2 + v**2 + h**2) ** (3 / 2)) / 3.0
+def _primitive_of_uvg(u, v, w):
+    return ((u**2 + v**2 + w**2) ** (3 / 2)) / 3.0
+
+
+def test_center():
+    assert 4 * _primitive_of_uvg(0.5, 0.5, 0) == pytest.approx(3.5255, 0.001)
+
+
+def test_edge_mid_point():
+    assert 4 * _primitive_of_uvg(1.0, 0.5, 0) == pytest.approx(2.4061, 0.001)
+
+
+def test_corner():
+    assert 4 * _primitive_of_uvg(1.0, 1.5, 0) == pytest.approx(1.7627, 0.001)
+
+
+def test_above_center():
+    assert 4 * _primitive_of_uvg(0.5, 0.5, 0.5) == pytest.approx(1.5867, 0.001)
 
 
 #
@@ -58,10 +74,10 @@ def discrete_green_function(xc, yc, zc, a, b):
     u1, v1 = xc + a / 2, yc + b / 2
     u2, v2 = xc - a / 2, yc + b / 2
     result = (
-        _primitive_of_g(u=u1, v=v1, h=zc)
-        + _primitive_of_g(u=u2, v=v2, h=zc)
-        - _primitive_of_g(u=u1, v=v2, h=zc)
-        - _primitive_of_g(u=u2, v=v1, h=zc)
+        _primitive_of_g(u=u1, v=v1, w=zc)
+        + _primitive_of_g(u=u2, v=v2, w=zc)
+        - _primitive_of_g(u=u1, v=v2, w=zc)
+        - _primitive_of_g(u=u2, v=v1, w=zc)
     )
     assert result == _definite_integral(_primitive_of_g, u1, u2, v1, v2, zc)  # nosec
     S = a * b
@@ -107,7 +123,7 @@ def average_discrete_green_function(xc, yc, zc, a, b):
 
 # gal,pm,gf,loc
 GAL, PM, GF, LOC = 0, 1, 2, 3
-_reference_table = [
+_table_1 = [
     (2.9732, 3.5255, np.Inf, (0, 0, 0)),
     (1.1121, 1.0380, 1.0, (1, 0, 0)),
     (0.7490, 0.7247, 0.7071, (1, 1, 0)),
@@ -118,19 +134,19 @@ _reference_table = [
 ]
 
 
-@pytest.mark.parametrize("pm,loc", [(row[PM], row[LOC]) for row in _reference_table])
+@pytest.mark.parametrize("pm,loc", [(row[PM], row[LOC]) for row in _table_1])
 def test_discrete_green_function(pm, loc):
     assert discrete_green_function(*loc, a=1, b=1) == pytest.approx(pm, abs=0.0001)
 
 
-@pytest.mark.parametrize("gal,loc", [(row[GAL], row[LOC]) for row in _reference_table])
+@pytest.mark.parametrize("gal,loc", [(row[GAL], row[LOC]) for row in _table_1])
 def test_average_discrete_green_function(gal, loc):
     assert average_discrete_green_function(*loc, a=1, b=1) == pytest.approx(
         gal, abs=0.0001
     )
 
 
-@pytest.mark.parametrize("gf,loc", [(row[GF], row[LOC]) for row in _reference_table])
+@pytest.mark.parametrize("gf,loc", [(row[GF], row[LOC]) for row in _table_1])
 def test_green_function(gf, loc):
     assert 1 / np.sqrt(loc[0] ** 2 + loc[1] ** 2 + loc[3] ** 2) == pytest.approx(
         gf, abs=0.001
