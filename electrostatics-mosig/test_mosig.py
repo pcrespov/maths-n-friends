@@ -118,19 +118,19 @@ _reference_table = [
 ]
 
 
-@pytest.param("pm,loc", [(row[PM], row[LOC]) for row in _reference_table])
+@pytest.mark.parametrize("pm,loc", [(row[PM], row[LOC]) for row in _reference_table])
 def test_discrete_green_function(pm, loc):
     assert discrete_green_function(*loc, a=1, b=1) == pytest.approx(pm, abs=0.0001)
 
 
-@pytest.param("gal,loc", [(row[GAL], row[LOC]) for row in _reference_table])
+@pytest.mark.parametrize("gal,loc", [(row[GAL], row[LOC]) for row in _reference_table])
 def test_average_discrete_green_function(gal, loc):
     assert average_discrete_green_function(*loc, a=1, b=1) == pytest.approx(
         gal, abs=0.0001
     )
 
 
-@pytest.param("gal,loc", [(row[GF], row[LOC]) for row in _reference_table])
+@pytest.mark.parametrize("gf,loc", [(row[GF], row[LOC]) for row in _reference_table])
 def test_green_function(gf, loc):
     assert 1 / np.sqrt(loc[0] ** 2 + loc[1] ** 2 + loc[3] ** 2) == pytest.approx(
         gf, abs=0.001
