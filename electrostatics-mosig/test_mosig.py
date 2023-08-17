@@ -151,7 +151,7 @@ def test_average_discrete_green_function(gal, loc):
 
 @pytest.mark.parametrize("gf,loc", [(row[GF], row[LOC]) for row in _table_1])
 def test_green_function(gf, loc):
-    assert 1 / np.sqrt(loc[0] ** 2 + loc[1] ** 2 + loc[3] ** 2) == pytest.approx(
+    assert 1 / np.sqrt(loc[0] ** 2 + loc[1] ** 2 + loc[2] ** 2) == pytest.approx(
         gf, abs=0.001
     )
 
