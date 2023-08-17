@@ -192,8 +192,8 @@ def run_static_plate(
     y = np.linspace(b / 2, b_side - b / 2, n)
 
     x_matrix, y_matrix = np.meshgrid(x, y)
-    assert x_matrix.size == m*n # nosec
-    assert y_matrix.size == x_matrix.size # nosec
+    assert x_matrix.size == m * n  # nosec
+    assert y_matrix.size == x_matrix.size  # nosec
 
     x_vector = np.reshape(x_matrix, newshape=x_matrix.size)
     y_vector = np.reshape(y_matrix, newshape=y_matrix.size)
@@ -210,7 +210,7 @@ def run_static_plate(
                 y_basis=y_vector[j],
                 z_basis=0,
                 x_test=x_vector[i],
-                y_test=x_vector[i],
+                y_test=y_vector[i],
                 z_test=0,
                 a=a,
                 b=b,
@@ -219,6 +219,7 @@ def run_static_plate(
             )
 
     # excitation vector
+    print(mom)
 
     # (1) constant potential
     def _excite_with_constant_potential(v):
@@ -252,7 +253,6 @@ def run_static_plate(
     print(f"{total_charge=} Coulombs")
     print(f"{normalized_capacity=}")
     print(f"{capacity=} F")
-
 
 
 def test_run():
