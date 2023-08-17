@@ -171,7 +171,7 @@ def eval_stat_mom(
     zc = np.abs(z_basis - z_test)
     rh = np.sqrt(xc**2 + yc**2)
 
-    use_gf_values = rh > factor_resolution_h * max(a, b)
+    use_gf_values = rh > (factor_resolution_h * max(a, b))
     if use_gf_values:
         r = np.sqrt(xc**2 + yc**2 + zc**2)  # distance between cell centers
         return 1 / r
@@ -192,12 +192,15 @@ def run_static_plate(
     y = np.linspace(b / 2, b_side - b / 2, n)
 
     x_matrix, y_matrix = np.meshgrid(x, y)
+    assert x_matrix.size == m*n # nosec
+    assert y_matrix.size == x_matrix.size # nosec
 
-    x_vector = np.reshape(x_matrix, newshape=(1, m * n))
-    y_vector = np.reshape(y_matrix, newshape=(1, m * n))
+    x_vector = np.reshape(x_matrix, newshape=x_matrix.size)
+    y_vector = np.reshape(y_matrix, newshape=y_matrix.size)
 
     # filling the Mom matrix
-    ndim = m * n
+    # TODO: vectorize
+    ndim = x_matrix.size
     tresh = 10
     mom = np.zeros((ndim, ndim))
     for i in range(ndim):
@@ -233,6 +236,7 @@ def run_static_plate(
 
     excitation_potential = 1
     excv = _excite_with_constant_potential(excitation_potential)
+    # excv = _excite_with_point_charge()
 
     # Solving linear system
     charge = np.linalg.solve(mom, excv)
@@ -248,3 +252,8 @@ def run_static_plate(
     print(f"{total_charge=} Coulombs")
     print(f"{normalized_capacity=}")
     print(f"{capacity=} F")
+
+
+
+def test_run():
+    run_static_plate()
