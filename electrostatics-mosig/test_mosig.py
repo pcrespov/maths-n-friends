@@ -81,6 +81,7 @@ def discrete_green_function(xc, yc, zc, a, b):
 
 
 def average_discrete_green_function(xc, yc, zc, a, b):
+    zc += _EPS
     x1, x2, y1, y2 = xc - a, xc, yc - b, yc
     Yuu = (
         x1 * y1 * _definite_integral(_primitive_of_g, x1, x2, y1, y2, zc)
