@@ -13,7 +13,7 @@ def _primitive_of_g(u, v, w):
     return (
         u * np.arcsinh(v / np.sqrt(u**2 + w**2))
         + v * np.arcsinh(u / np.sqrt(v**2 + w**2))
-        - w * np.arctanh(u * v / (w * np.sqrt(u**2 + v**2 + w**2)))
+        - w * np.arctan(u * v / (w * np.sqrt(u**2 + v**2 + w**2)))
     )
 
 
@@ -71,18 +71,9 @@ def _definite_integral(primitive: Callable, x1, x2, y1, y2, h):
 
 
 def discrete_green_function(xc, yc, zc, a, b):
-    # using change of variables
-    # u = x - xc
-    # v = y - yc
-    u1, u2 = -a / 2 - xc, a / 2 - xc
-    v1, v2 = -b / 2 - yc, b / 2 - yc
-    result = (
-        _primitive_of_g(u=u1, v=v1, w=zc)
-        + _primitive_of_g(u=u2, v=v2, w=zc)
-        - _primitive_of_g(u=u1, v=v2, w=zc)
-        - _primitive_of_g(u=u2, v=v1, w=zc)
-    )
-    assert result == _definite_integral(_primitive_of_g, u1, u2, v1, v2, zc)  # nosec
+    u1, u2 = xc + a / 2, xc - a / 2
+    v1, v2 = yc + b / 2, yc - b / 2
+    result = _definite_integral(_primitive_of_g, u1, u2, v1, v2, zc)
     S = a * b
     return result / S
 
