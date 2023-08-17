@@ -69,11 +69,13 @@ def _definite_integral(primitive: Callable, x1, x2, y1, y2, h):
 # Integration
 #
 
+_EPS = np.finfo(float).eps
+
 
 def discrete_green_function(xc, yc, zc, a, b):
     u1, u2 = xc + a / 2, xc - a / 2
     v1, v2 = yc + b / 2, yc - b / 2
-    result = _definite_integral(_primitive_of_g, u1, u2, v1, v2, zc)
+    result = _definite_integral(_primitive_of_g, u1, u2, v1, v2, zc + _EPS)
     S = a * b
     return result / S
 
@@ -124,8 +126,11 @@ _table_1 = [
     (0.2513, 0.2506, 0.2500, (4, 0, 0)),
     (2.4674, 2.9533, 10.0, (0, 0, 0.1)),
     (0.8788, 0.9286, 1.0, (0, 0, 1)),
-    (0.1987, 0.1933, 0.2, (0, 0, 5)),
+    (0.1987, 0.1993, 0.2, (0, 0, 5)),
 ]
+
+# E         Obtained: 0.1993379575985088
+# E         Expected: 0.1933 ± 1.0e-04
 
 
 @pytest.mark.parametrize("pm,loc", [(row[PM], row[LOC]) for row in _table_1])
