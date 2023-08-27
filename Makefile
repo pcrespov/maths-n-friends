@@ -14,6 +14,7 @@ SHELL := /bin/bash
 
 
 devenv: .venv ## sets up development enviroment
+	@$</bin/pip install -r requirements-dev.txt
 	@$</bin/pip install -r requirements.txt
 	@echo "Type 'source .venv/bin/activate' to activate a python virtual environment"
 
@@ -32,9 +33,7 @@ clean: ## cleans all unversioned files in project and temp files create by this 
 	@echo -n "$(shell whoami), are you REALLY sure? [y/N] " && read ans && [ $${ans:-N} = y ]
 	@git clean $(_GIT_CLEAN_ARGS)
 
-.PHONY: requirements.txt
-requirements.txt: requirements.in
-	pip-compile --build-isolation --upgrade $<
+
 
 clean-all:
 	-@rm -rf .venv
