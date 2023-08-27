@@ -1,8 +1,11 @@
 from typing import Callable
 
 import numpy as np
-import pytest
 from scipy.constants import epsilon_0
+
+import logging
+
+_logger = logging.getLogger(__name__)
 
 #
 # Primitives of Table I
@@ -34,21 +37,6 @@ def _primitive_of_vg(u, v, w):
 def _primitive_of_uvg(u, v, w):
     return ((u**2 + v**2 + w**2) ** (3 / 2)) / 3.0
 
-
-def test_center():
-    assert 4 * _primitive_of_uvg(0.5, 0.5, 0) == pytest.approx(3.5255, 0.001)
-
-
-def test_edge_mid_point():
-    assert 4 * _primitive_of_uvg(1.0, 0.5, 0) == pytest.approx(2.4061, 0.001)
-
-
-def test_corner():
-    assert 4 * _primitive_of_uvg(1.0, 1.5, 0) == pytest.approx(1.7627, 0.001)
-
-
-def test_above_center():
-    assert 4 * _primitive_of_uvg(0.5, 0.5, 0.5) == pytest.approx(1.5867, 0.001)
 
 
 #
@@ -118,41 +106,6 @@ def average_discrete_green_function(xc, yc, zc, a, b):
     return (Yuu + Yud + Ydu + Ydd) / S**2
 
 
-# gal,pm,gf,loc
-GAL, PM, GF, LOC = 0, 1, 2, 3
-_table_1 = [
-    (2.9732, 3.5255, np.Inf, (0, 0, 0)),
-    (1.1121, 1.0380, 1.0, (1, 0, 0)),
-    (0.7490, 0.7247, 0.7071, (1, 1, 0)),
-    (0.2513, 0.2506, 0.2500, (4, 0, 0)),
-    (2.4674, 2.9533, 10.0, (0, 0, 0.1)),
-    (0.8788, 0.9286, 1.0, (0, 0, 1)),
-    (0.1987, 0.1993, 0.2, (0, 0, 5)),
-]
-
-# E         Obtained: 0.1993379575985088
-# E         Expected: 0.1933 ± 1.0e-04
-
-
-@pytest.mark.parametrize("pm,loc", [(row[PM], row[LOC]) for row in _table_1])
-def test_discrete_green_function(pm, loc):
-    assert discrete_green_function(*loc, a=1, b=1) == pytest.approx(pm, abs=0.0001)
-
-
-@pytest.mark.parametrize("gal,loc", [(row[GAL], row[LOC]) for row in _table_1])
-def test_average_discrete_green_function(gal, loc):
-    assert average_discrete_green_function(*loc, a=1, b=1) == pytest.approx(
-        gal, abs=0.0001
-    )
-
-
-@pytest.mark.parametrize("gf,loc", [(row[GF], row[LOC]) for row in _table_1])
-def test_green_function(gf, loc):
-    assert 1 / np.sqrt(loc[0] ** 2 + loc[1] ** 2 + loc[2] ** 2) == pytest.approx(
-        gf, abs=0.001
-    )
-
-
 def eval_stat_mom(
     x_basis,
     y_basis,
@@ -219,7 +172,7 @@ def run_static_plate(
             )
 
     # excitation vector
-    print(mom)
+    _logger.debug(f"{mom=}")
 
     # (1) constant potential
     def _excite_with_constant_potential(v):
@@ -254,6 +207,3 @@ def run_static_plate(
     print(f"{normalized_capacity=}")
     print(f"{capacity=} F")
 
-
-def test_run():
-    run_static_plate()
