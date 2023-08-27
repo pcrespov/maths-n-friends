@@ -8,7 +8,6 @@ from em_statics import _primitive_of_g, _primitive_of_ug, _primitive_of_uvg, _pr
 from em_statics import discrete_green_function, average_discrete_green_function, run_static_plate
 
 
-
 def test_center():
     assert 4 * _primitive_of_uvg(0.5, 0.5, 0) == pytest.approx(3.5255, 0.001)
 
