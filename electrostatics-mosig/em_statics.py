@@ -61,7 +61,7 @@ _EPS = np.finfo(float).eps
 
 def green_function(xc, yc, zc):
     # 1/R
-    return 1 / np.sqrt(xc ** 2 + yc ** 2 + zc ** 2) 
+    return 1 / np.sqrt(xc ** 2 + yc ** 2 + (zc + _EPS) ** 2) 
 
 
 def discrete_green_function(xc, yc, zc, a, b):
