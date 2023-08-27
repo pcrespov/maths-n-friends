@@ -16,6 +16,7 @@ SHELL := /bin/bash
 devenv: .venv ## sets up development enviroment
 	@$</bin/pip install -r requirements-dev.txt
 	@$</bin/pip install -r requirements.txt
+	@$</bin/pre-commit install
 	@echo "Type 'source .venv/bin/activate' to activate a python virtual environment"
 
 
