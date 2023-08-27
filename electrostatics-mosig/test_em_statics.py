@@ -5,7 +5,7 @@ import pytest
 from scipy.constants import epsilon_0
 
 from em_statics import _primitive_of_g, _primitive_of_ug, _primitive_of_uvg, _primitive_of_vg
-from em_statics import discrete_green_function, average_discrete_green_function, run_static_plate
+from em_statics import discrete_green_function, average_discrete_green_function, run_static_plate, green_function
 
 
 def test_center():
@@ -54,7 +54,7 @@ def test_average_discrete_green_function(gal, loc):
 
 @pytest.mark.parametrize("gf,loc", [(row[GF], row[LOC]) for row in _table_1])
 def test_green_function(gf, loc):
-    assert 1 / np.sqrt(loc[0] ** 2 + loc[1] ** 2 + loc[2] ** 2) == pytest.approx(
+    assert green_function(*loc) == pytest.approx(
         gf, abs=0.001
     )
 

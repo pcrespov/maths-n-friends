@@ -59,6 +59,10 @@ def _definite_integral(primitive: Callable, x1, x2, y1, y2, h):
 
 _EPS = np.finfo(float).eps
 
+def green_function(xc, yc, zc):
+    # 1/R
+    return 1 / np.sqrt(xc ** 2 + yc ** 2 + zc ** 2) 
+
 
 def discrete_green_function(xc, yc, zc, a, b):
     u1, u2 = xc + a / 2, xc - a / 2
