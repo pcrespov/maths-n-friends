@@ -6,5 +6,6 @@ jupyter_nbextensions_configurator
 matplotlib
 numpy
 plotly
+pytest
 scipy
 sympy

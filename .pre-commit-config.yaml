@@ -1,0 +1,69 @@
+default_language_version:
+  python: python3
+
+ci:
+  autofix_prs: true
+  autoupdate_commit_msg: '[pre-commit.ci] pre-commit suggestions'
+  autoupdate_schedule: quarterly
+  # submodules: true
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.3.0
+    hooks:
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-yaml
+      - id: check-docstring-first
+      - id: check-executables-have-shebangs
+      - id: check-toml
+      - id: check-case-conflict
+      - id: check-added-large-files
+        args: ['--maxkb=1024']
+      - id: detect-private-key
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.0.280
+    hooks:
+      - id: ruff
+        types_or: [python, pyi, jupyter]
+
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v2.34.0
+    hooks:
+      - id: pyupgrade
+        name: upgrade code
+        args: ["--py38-plus"]
+
+  - repo: https://github.com/hadialqattan/pycln
+    rev: v1.2.5
+    hooks:
+      - id: pycln
+        name: prune imports
+        args: [--expand-stars]
+
+  - repo: https://github.com/psf/black
+    rev: 22.3.0
+    hooks:
+      - id: black
+        name: format code
+
+  - repo: https://github.com/executablebooks/mdformat
+    rev: 0.7.14
+    hooks:
+      - id: mdformat
+        name: format markdown
+        additional_dependencies:
+          - mdformat-gfm
+          - mdformat_frontmatter
+        exclude: CHANGELOG.md
+
+  - repo: https://github.com/nbQA-dev/nbQA
+    rev: 1.3.1
+    hooks:
+      - id: nbqa-black
+        additional_dependencies: [black]
+        name: format notebooks
+      - id: nbqa-mypy
+        additional_dependencies: [mypy]
+        name: static analysis for notebooks

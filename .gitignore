@@ -223,3 +223,5 @@ venv.bak/
 
 # serialization
 *.pkl
+electrostatics-mosig/fig3a.pdf
+electrostatics-mosig/fig3b.pdf
