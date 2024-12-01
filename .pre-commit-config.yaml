@@ -1,0 +1,31 @@
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+    -   id: check-yaml
+    -   id: end-of-file-fixer
+    -   id: trailing-whitespace
+- repo: https://github.com/fastai/nbdev
+  rev: 2.3.32
+  hooks:
+  - id: nbdev_clean
+- repo: https://github.com/mwouts/jupytext
+  rev: v1.16.4b
+  hooks:
+    - id: jupytext
+      args: [--sync]
+- repo: https://github.com/charliermarsh/ruff-pre-commit
+  rev: v0.8.1
+  hooks:
+    - id: ruff
+      name: ruff-nb
+      entry: nbqa ruff
+      language: python
+      types: [jupyter]
+- repo: local
+  hooks:
+    - id: clear-notebook-outputs
+      name: Clear Jupyter Notebook Outputs
+      entry: jupyter nbconvert --ClearOutputPreprocessor.enabled=True --inplace
+      language: system
+      files: \.ipynb$
