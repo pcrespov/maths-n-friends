@@ -9,4 +9,8 @@ repos:
   rev: 2.3.32
   hooks:
   - id: nbdev_clean
-  - id: nbdev_export
+- repo: https://github.com/mwouts/jupytext
+  rev: v1.16.4b
+  hooks:
+    - id: jupytext
+      args: [--sync]
