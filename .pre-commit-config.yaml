@@ -14,3 +14,18 @@ repos:
   hooks:
     - id: jupytext
       args: [--sync]
+- repo: https://github.com/charliermarsh/ruff-pre-commit
+  rev: v0.8.1
+  hooks:
+    - id: ruff
+      name: ruff-nb
+      entry: nbqa ruff
+      language: python
+      types: [jupyter]
+- repo: local
+  hooks:
+    - id: clear-notebook-outputs
+      name: Clear Jupyter Notebook Outputs
+      entry: jupyter nbconvert --ClearOutputPreprocessor.enabled=True --inplace
+      language: system
+      files: \.ipynb$
